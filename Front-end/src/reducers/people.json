@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "firstName":"Emanuel",
+        "secondName":"Crossan",
+        "phone": "0872753394",
+        "password": "linked in",
+        "note": "notes",
+        "project": "project"
+
+    },   
+     {
+        "id": 2,
+        "firstName":"Robert",
+        "secondName":"Crossan",
+        "phone": "0872753394",
+        "password": "linked in",
+        "note": "notes",
+        "project": "project"
+
+    },   
+     {
+        "id": 3,
+        "firstName":"Dylan",
+        "secondName":"Crossan",
+        "phone": "0872753394",
+        "password": "linked in",
+        "note": "notes",
+        "project": "project"
+
+    }
+]
