@@ -1,8 +1,8 @@
 const initialState = {
     detailView: false,
     personSelected: null,
-    email: '',
-    password: '',
+    email: 'test@test.ie',
+    password: 'secret123',
     token: '',
     first_name: '',
     last_name: '',

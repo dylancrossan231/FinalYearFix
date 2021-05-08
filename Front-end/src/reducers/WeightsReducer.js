@@ -43,16 +43,16 @@ export default (state = initialState, action) => {
         weights: [...state.weights, action.payload],
       };
     case "UPDATE_WEIGHT":
-      console.log(action.payload);
-      const index = state.weights.findIndex(
-        (item) => item._id === action.payload.id
-      );
-      console.log("index of weights array",index) 
-      // state.weights.splice(index, 1, action.payload.weight);
-      return {
-        ...state,
-        weights: [...state.weights[index], action.payload.weight],
-      };
+    console.log(action.payload.res._id);
+ const index = state.weights.findIndex(item => item.id !== action.payload.res._id); //finding index of the item
+ console.log("INDEX",index)
+ const newArray = [...state.weights]; //making a new array
+ newArray[index] = action.payload.res;//changing value in the new array
+
+ return { 
+  ...state, //copying the orignal state
+  weights: newArray, //reassingning todos to new array
+ }
     case "PASS_WEIGHT_AND_ID_TO_STATE":
       console.log(action.payload);
       return {

@@ -80,6 +80,9 @@ class HealthZone extends Component {
                   rounded
                   title="Sleep Zone"
                   style={styles.btnStyle}
+                  onPress={() =>
+                    this.props.navigation.navigate(routes.SLEEP_HOME)
+                  }
                 >
                   <Text>Sleep Zone</Text>
                 </Button>
@@ -99,7 +102,9 @@ class HealthZone extends Component {
                   rounded
                   title="Weight Zone"
                   style={styles.btnStyle}
-                  onPress={() => this.props.navigation.navigate(routes.WEIGHTS_HOME)}
+                  onPress={() =>
+                    this.props.navigation.navigate(routes.WEIGHTS_HOME)
+                  }
                 >
                   <Text>Weight Tracking</Text>
                 </Button>

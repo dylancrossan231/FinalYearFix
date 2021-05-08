@@ -56,23 +56,23 @@ router.delete("/:id", verify, (req, res, next) => {
 });
 
 router.put("/update/:id", verify, async (req, res, next) => {
-  Weight.updateOne(
-    {
-      _id: req.params.id,
-    },
-    {
-      $set: req.body,
+  try {
+    const weight = await Weight.findById(req.params.id).exec();
+
+    if (weight === null) {
+      res.status(404).json({
+        success: false,
+        message: "Weight not found",
+      });
+    } else {
+      weight.weight = req.body.weight;
+      weight.save();
+      res.status(200).json(weight);
     }
-  )
-    .then(() => {
-      res.status(200).json({
-        weight: "Weight Updated",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
     });
+  }
 });
 module.exports = router;

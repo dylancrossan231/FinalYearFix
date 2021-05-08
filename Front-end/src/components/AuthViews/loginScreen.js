@@ -33,11 +33,13 @@ class loginScreen extends Component {
               <Item
                 rounded
                 style={styles.textFieldStyle}
-                placeholder={'Email...'}
-                value={this.props.email}>
+                placeholder={"Email..."}
+                value={this.props.email}
+              >
                 <Input
+                  value="test@test.ie"
                   onChangeText={(value) =>
-                    this.props.formUpdate({prop: 'email', value})
+                    this.props.formUpdate({ prop: "email", value })
                   }
                   placeholder="Email Address"
                 />
@@ -47,11 +49,13 @@ class loginScreen extends Component {
               <Item
                 rounded
                 style={styles.textFieldStyle}
-                placeholder={'Password'}
-                value={this.props.password}>
+                placeholder={"Password"}
+                value={this.props.password}
+              >
                 <Input
+                  value="secret123"
                   onChangeText={(value) =>
-                    this.props.formUpdate({prop: 'password', value})
+                    this.props.formUpdate({ prop: "password", value })
                   }
                   placeholder="Password"
                 />
@@ -64,7 +68,8 @@ class loginScreen extends Component {
                 rounded
                 title="Login"
                 style={styles.btnStyle}
-                onPress={this.onLogin.bind(this)}>
+                onPress={this.onLogin.bind(this)}
+              >
                 <Text style={styles.btnText}>Login</Text>
               </Button>
             </View>

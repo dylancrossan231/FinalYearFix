@@ -5,6 +5,10 @@ const sleepSchema = new mongoose.Schema({
     type: Number,
     required: "Hours of sleep is required",
   },
+  minutes: {
+    type: Number,
+    required: "Minutes of sleep is required",
+  },
 
   user: {
     type: Schema.Types.ObjectId,

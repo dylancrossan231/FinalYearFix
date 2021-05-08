@@ -339,41 +339,39 @@ export const createNewWeight = ({ weight, token }) => {
 //       });
 //   };
 // };
-export const updateWeight = ({ weight, token, id }) => {
-  console.log(weight)
+export const updateWeight = ({ weightNew, token, id }) => {
+  const weight = {
+    weight:weightNew,
+    id: id,
+  };
   return (dispatch) => {
-    fetch(`http://192.168.1.22:3000/api/weights/update/${id}`, {
-    
+    fetch(`http://192.168.1.22:3000/api/weight/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
         "auth-token": token,
       },
-      body: JSON.stringify({weight: weight}),
-    }
-  )
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res, "res");
-      dispatch({
-        type: "UPDATE_WEIGHT",
-        payload: {
-                  weight: weight,
-                  id: id
-                },
-      });
+      body: JSON.stringify(weight),
     })
-    .catch((error) => {
-      console.log(error)
-      dispatch({
-        type: "SET_ERROR_WEIGHT",
-        payload: error
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch({
+          type: "UPDATE_WEIGHT",
+          payload: {
+            res
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_SLEEPS",
+          payload: error,
+        });
       });
-    });
+  };
 };
-}
-
 
 
 export const formUpdateWeight = ({ prop, value }) => {
@@ -387,5 +385,146 @@ export const passWeightAndID = ({ weight, id }) => {
   return {
     type: "PASS_WEIGHT_AND_ID_TO_STATE",
     payload: { weight, id },
+  };
+};
+
+
+
+
+
+
+
+
+
+
+
+export const loadInitialSleeps = (token) => {
+  return (dispatch) => {
+    fetch("http://192.168.1.22:3000/api/sleep", {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "auth-token": token,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "INITIAL_FETCH_SLEEPS", payload: data });
+      })
+      .catch((error) => {
+        console.log("error load sleeps!", error);
+        return dispatch({
+          type: "SET_ERROR",
+          payload: "Error: Could not connect to the server",
+        });
+      });
+  };
+};
+
+export const deleteSleep = (token, id) => {
+  console.log(id,token)
+  return (dispatch) => {
+    fetch(`http://192.168.1.22:3000/api/sleep/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+    }).then((data) => {
+      dispatch({ type: "DELETE_SLEEPS", payload: { _id: id } }).catch(
+        (error) => {
+          return dispatch({
+            type: "SET_ERROR_SLEEPS",
+            payload: "Error: Could not connect to the server",
+          });
+        }
+      );
+    });
+  };
+};
+
+export const createNewSleep = ({ hours, minutes, token }) => {
+
+  return (dispatch) => {
+    fetch("http://192.168.1.22:3000/api/sleep/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify({
+        hours: hours,
+         minutes: minutes
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "NEW_SLEEPS", payload: data });
+      })
+      .catch((error) => {
+        console.log("error load sleeps!", error);
+        return dispatch({
+          type: "SET_ERROR",
+          payload: "Error: Could not connect to the server",
+        });
+      });
+  };
+};
+
+export const updateSleep = ({ hours,minutes, token, id }) => {
+  const sleep = {
+    hours: hours,
+    minutes: minutes,
+    id: id,
+  };
+  console.log(hours,minutes);
+  return (dispatch) => {
+    fetch(`http://192.168.1.22:3000/api/sleep/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify(sleep),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch({
+          type: "UPDATE_SLEEPS",
+          payload: {
+            res
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_SLEEPS",
+          payload: error,
+        });
+      });
+  };
+};
+
+export const formUpdateSleep = ({ prop, value }) => {
+  return {
+    type: "FORM_UPDATE_SLEEPS",
+    payload: { prop, value },
+  };
+};
+export const passHoursMinutesAndID = ({ hours, minutes, id }) => {
+  console.log(hours, minutes, id);
+  return {
+    type: "PASS_HOURS_MINUTES_AND_ID_TO_STATE",
+    payload: { hours, minutes, id },
   };
 };

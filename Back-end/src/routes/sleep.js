@@ -10,9 +10,11 @@ router.get("/", verify, (req, res) => {
   });
 });
 router.post("/create", verify, async (req, res) => {
+  console.log(req.body.hours, req.body.minutes, req.user._id);
   //new workout
   const sleep = new Sleep({
     hours: req.body.hours,
+    minutes: req.body.minutes,
     user: req.user._id,
   });
 
@@ -54,25 +56,54 @@ router.delete("/:id", verify, (req, res, next) => {
       });
     });
 });
+// const updateComment = async function (req, res, next) {
+//   try {
+//     const article = await Article.findById(req.params.articleId).exec();
+//     const comment = await Comment.findById(req.params.commentId).exec();
 
+//     if (article === null) {
+//       res.status(404).json({
+//         success: false,
+//         message: "Article not found",
+//       });
+//     } else if (comment === null) {
+//       res.status(404).json({
+//         success: false,
+//         message: "comment not found",
+//       });
+//     } else {
+//       comment.body = req.body.body;
+//       comment.save();
+//       comment.author = req.user;
+//       res.status(200).json(comment);
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       error: error.message,
+//     });
+//   }
+// };
 router.put("/update/:id", verify, async (req, res, next) => {
-  Sleep.updateOne(
-    {
-      _id: req.params.id,
-    },
-    {
-      $set: req.body,
-    }
-  )
-    .then(() => {
-      res.status(200).json({
-        sleep: "Sleep Updated",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
+ try {
+   const sleep = await Sleep.findById(req.params.id).exec();
+
+   if (sleep === null) {
+     res.status(404).json({
+       success: false,
+       message: "Sleep not found",
+     });
+
+   } else {
+    sleep.hours = req.body.hours;
+    sleep.minutes = req.body.minutes;
+     sleep.save();
+     res.status(200).json(sleep);
+     console.log(sleep)
+   }
+ } catch (error) {
+   res.status(500).json({
+     error: error.message,
+   });
+ }
 });
 module.exports = router;

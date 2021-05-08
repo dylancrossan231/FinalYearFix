@@ -5,6 +5,9 @@ import HealthZone from "../HealthZone/HealthZone";
 import WeightsHome from "../HealthZone/HealthZoneComponents/Weights/WeightsHome";
 import AddWeight from "../HealthZone/HealthZoneComponents/Weights/AddWeight";
 import UpdateWeight from "../HealthZone/HealthZoneComponents/Weights/UpdateWeight";
+import AddSleep from "../HealthZone/HealthZoneComponents/Sleep/AddSleep";
+import SleepsHome from "../HealthZone/HealthZoneComponents/Sleep/SleepsHome";
+import UpdateSleeps from "../HealthZone/HealthZoneComponents/Sleep/UpdateSleeps";
 
 
 export function HealthZoneNavigator(props) {
@@ -27,6 +30,14 @@ export function HealthZoneNavigator(props) {
       />
       <Stack.Screen name={routes.ADD_WEIGHT} component={AddWeight} />
       <Stack.Screen name={routes.UPDATE_WEIGHT} component={UpdateWeight} />
+
+      <Stack.Screen
+        name={routes.SLEEP_HOME}
+        component={SleepsHome}
+        unmountOnBlur={true}
+      />
+      <Stack.Screen name={routes.ADD_SLEEP} component={AddSleep} />
+      <Stack.Screen name={routes.UPDATE_SLEEP} component={UpdateSleeps} />
     </Stack.Navigator>
   );
 }
