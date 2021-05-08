@@ -43,9 +43,6 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_SLEEPS":
-
-
-
  const index = state.sleeps.findIndex(item => item.id !== action.payload.res._id); //finding index of the item
  console.log(index)
  const newArray = [...state.sleeps]; //making a new array
@@ -56,21 +53,7 @@ export default (state = initialState, action) => {
   ...state, //copying the orignal state
   sleeps: newArray, //reassingning todos to new array
  }
-    //   const sleep = action.payload.res;
 
-    //   const sleeps = state.sleeps; 
-      
-    //   const index = sleeps.findIndex((item) => sleep._id === item._id);
-    //   if (index !== -1) {
-    //     sleeps.splice(index, 1, sleep);
-    //   }
-    //   console.log(sleep)
-    //   console.log(index)
-
-    //   return {
-    //     ...state,
-    //     sleeps : [state.sleeps]
-    //   };
 
     case "PASS_HOURS_MINUTES_AND_ID_TO_STATE":
       console.log(action.payload);
