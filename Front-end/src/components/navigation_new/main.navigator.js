@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { routes } from './app-routes';
-import AddWorkout from '../AddWorkout';
-import WorkoutsHome from '../WorkoutsHome';
+import AddWorkout from '../Workouts/AddWorkout';
+import WorkoutsHome from '../Workouts/WorkoutsHome';
 
 
 

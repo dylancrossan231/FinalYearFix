@@ -29,7 +29,7 @@ export const createNewContact = ({email, password, first_name, last_name, userna
 
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json",
       },
       body: JSON.stringify({
         email: email,
@@ -255,35 +255,137 @@ export const deleteWeight = (token,id) => {
         });
 }
 };
+// export const createNewWeight = ({ weight, token }) => {
+//   return (dispatch) => {
+//     fetch("http://192.168.1.22:3000/api/weights/create", {
+//       method: "POST",
+//       headers: {
+//         "Accept": "application/json",
+//         "Content-Type": "application/json",
+//         "auth-token": token,
+//       },
+//       body: JSON.stringify({
+//         weight: weight,
+//       }),
+//     })
+//       .then((response) => console.log(response))
+//       .then((data) => {
+//         dispatch({ type: "NEW_WEIGHT", payload: data });
+//       })
+//       .catch((error) => console.log(error));
+//   };
+// };
+
 export const createNewWeight = ({ weight, token }) => {
-      console.log(weight);
-
+  console.log(weight)
   return (dispatch) => {
-
     fetch("http://192.168.1.22:3000/api/weights/create", {
       method: "POST",
       headers: {
-        "Accept": "application/json",
         "Content-Type": "application/json",
+        "Accept": "application/json",
         "auth-token": token,
       },
       body: JSON.stringify({
-         weight: weight
+        weight: weight,
       }),
-      
     })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
       .then((data) => {
-              console.log(weight);
-
+        
         dispatch({ type: "NEW_WEIGHT", payload: data });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log("error load weights!", error);
+        return dispatch({
+          type: "SET_ERROR",
+          payload: "Error: Could not connect to the server",
+        });
+      });
   };
 };
+
+// export const updateWeight = ({ weight, token, id }) => {
+//   const newWeight = {
+//     weight: weight
+//   }
+//   return (dispatch) => {
+//     fetch(`http://192.168.1.22:3000/api/weights/update/${id}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Accept": "application/json",
+//         "auth-token": token,
+//       },
+//       body: JSON.stringify(
+//         newWeight
+//       ),
+//     })
+//       .then((response) => {
+//         return response.json();
+//       })
+//       .then((data) => {
+//         dispatch({ type: "UPDATE_WEIGHT", payload: data });
+//       })
+//       .catch((error) => {
+//         console.log("error updating weight!", error)
+//         return dispatch({
+//           type: "SET_ERROR",
+//           payload: "Error: Could not connect to the server",
+//         });
+//       });
+//   };
+// };
+export const updateWeight = ({ weight, token, id }) => {
+  console.log(weight)
+  return (dispatch) => {
+    fetch(`http://192.168.1.22:3000/api/weights/update/${id}`, {
+    
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify({weight: weight}),
+    }
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res, "res");
+      dispatch({
+        type: "UPDATE_WEIGHT",
+        payload: {
+                  weight: weight,
+                  id: id
+                },
+      });
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch({
+        type: "SET_ERROR_WEIGHT",
+        payload: error
+      });
+    });
+};
+}
+
+
+
 export const formUpdateWeight = ({ prop, value }) => {
-  console.log(prop);
   return {
     type: "FORM_UPDATE_WEIGHT",
     payload: { prop, value },
+  };
+};
+export const passWeightAndID = ({ weight, id }) => {
+  console.log(weight, id)
+  return {
+    type: "PASS_WEIGHT_AND_ID_TO_STATE",
+    payload: { weight, id },
   };
 };

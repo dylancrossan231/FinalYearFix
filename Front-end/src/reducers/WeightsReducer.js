@@ -3,6 +3,7 @@ const initialState = {
   loading: false,
   error: null,
   weight: "",
+  updateId: ""
 };
 
 export default (state = initialState, action) => {
@@ -36,11 +37,30 @@ export default (state = initialState, action) => {
         [action.payload.prop]: action.payload.value,
       };
     case "NEW_WEIGHT":
-        console.log(action.payload)
+      console.log(action.payload.weight);
       return {
         ...state,
         weights: [...state.weights, action.payload],
       };
+    case "UPDATE_WEIGHT":
+      console.log(action.payload);
+      const index = state.weights.findIndex(
+        (item) => item._id === action.payload.id
+      );
+      console.log("index of weights array",index) 
+      // state.weights.splice(index, 1, action.payload.weight);
+      return {
+        ...state,
+        weights: [...state.weights[index], action.payload.weight],
+      };
+    case "PASS_WEIGHT_AND_ID_TO_STATE":
+      console.log(action.payload);
+      return {
+        ...state,
+        weight: action.payload.weight,
+        updateId: action.payload.id,
+      };
+
     default:
       return state;
   }

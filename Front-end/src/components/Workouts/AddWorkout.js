@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert , FlatList,SafeAreaView} from "react-native";
 import {connect} from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import { Container, Header, Content, Item, Button, Input ,Label,Form} from "native-base";
-import WorkoutsHome from "./WorkoutsHome"
-import ExerciseWorkoutItem from './ExerciseWorkoutItem';
+import ExerciseWorkoutItem from '../Exercises/ExerciseWorkoutItem';
 
 const styles = StyleSheet.create({
   useNativeDriver: true,

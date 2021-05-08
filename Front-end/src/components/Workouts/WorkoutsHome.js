@@ -3,7 +3,7 @@ import {View, Button, StyleSheet, FlatList, Text} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import WorkoutItem from './WorkoutItem';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 
 const styles = StyleSheet.create({

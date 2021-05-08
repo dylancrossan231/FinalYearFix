@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import {Container, Header, Content, Item, Input, Button} from 'native-base';
 
 

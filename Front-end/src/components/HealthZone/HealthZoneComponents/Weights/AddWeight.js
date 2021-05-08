@@ -6,7 +6,7 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as actions from "../../../../actions";
 import {
   Content,
   Item,
@@ -14,7 +14,7 @@ import {
   Container,
   Button
 } from "native-base";
-import {routes} from "./navigation_new/app-routes"
+import {routes} from "../../../navigation_new/app-routes"
 const styles = StyleSheet.create({
   useNativeDriver: true,
 
@@ -58,7 +58,7 @@ class AddWeight extends Component {
       token: this.props.token,
     });
     this.props.navigation.navigate(routes.WEIGHTS_HOME);
-
+ 
   }
 
   render() {
@@ -77,7 +77,10 @@ class AddWeight extends Component {
               >
                 <Input
                   onChangeText={(value) =>
-                    this.props.formUpdateWeight({ prop: "weight", value })
+                    this.props.formUpdateWeight({
+                      prop: "weight",
+                      value,
+                    })
                   }
                   placeholder="Enter your Weight"
                 />

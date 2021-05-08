@@ -13,6 +13,8 @@ router.post("/create", verify, async (req, res) => {
   let workoutExercises = req.body.workoutExercises;
   let workoutName = workoutbody.workout.workout_name;
   console.log(workoutName);
+  console.log(workoutExercises);
+  console.log(req.body);
   const checkWorkoutname = await Workout.findOne({
 
     workoutName: workoutName,

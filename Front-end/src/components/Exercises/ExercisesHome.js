@@ -3,8 +3,8 @@ import { View, StyleSheet, FlatList, Text } from "react-native";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/EvilIcons";
 import ExerciseItem from "./ExerciseItem";
-import * as actions from "../actions";
-import { routes } from "./navigation_new/app-routes";
+import * as actions from "../../actions";
+import { routes } from "../navigation_new/app-routes";
 import { Button } from "native-base";
 
 
@@ -46,7 +46,7 @@ if (previousScreen.state) {
 }
 
 this.props.loadInitialExercises(this.props.token);
-  }
+}
 
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (

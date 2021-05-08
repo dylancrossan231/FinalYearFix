@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import { routes } from "./app-routes";
 import { connect } from "react-redux";
-import loginScreen from "../loginScreen";
-import AddPerson from '../AddPerson';
+import loginScreen from "../AuthViews/loginScreen";
+import AddPerson from '../AuthViews/AddPerson';
 import * as actions from '../../actions';
 import {MainNavigator} from './main.navigator';
 import {AuthTabNavigator} from './authTab.navigator';

@@ -13,6 +13,8 @@ const authRoute = require('./src/routes/auth')
 const workoutsRoute = require('./src/routes/workouts')
 const exercisesRoute = require('./src/routes/exercises')
 const weightsRoute = require("./src/routes/weights")
+const sleepRoute = require("./src/routes/sleep");
+
 
 const PORT = 3000;
 // mongoose connection
@@ -27,6 +29,8 @@ app.use('/api/user', authRoute);
 app.use("/api/exercises", exercisesRoute);
 app.use('/api/workouts', workoutsRoute);
 app.use("/api/weights", weightsRoute);
+app.use("/api/sleep", sleepRoute);
+
 
 // bodyparser setup
 app.use(bodyParser.urlencoded({ extended: true }));

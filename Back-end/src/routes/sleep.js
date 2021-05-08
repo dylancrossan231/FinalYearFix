@@ -1,31 +1,31 @@
 const router = require("express").Router();
 const verify = require("./verifyToken");
-const Weight = require("../models/Weights");
 const User = require("../models/User");
+const Sleep = require("../models/Sleep");
 router.get("/", verify, (req, res) => {
-  Weight.find(function (err, weights) {
+  Sleep.find(function (err, sleeps) {
     if (err) res.send(err);
 
-    res.json(weights);
+    res.json(sleeps);
   });
 });
 router.post("/create", verify, async (req, res) => {
   //new workout
-  const weight = new Weight({
-    weight: req.body.weight,
+  const sleep = new Sleep({
+    hours: req.body.hours,
     user: req.user._id,
   });
 
   try {
-    const saveweight = await weight.save(function (err) {
+    const saveSleep = await sleep.save(function (err) {
       if (err) return console.log(err);
       let user = User.findById(req.user._id)
         .exec()
         .then(function (user) {
-          if (user.weights) {
-            user.weights.push(weight);
+          if (user.sleeps) {
+            user.sleeps.push(sleep);
           } else {
-            user.weights = weight;
+            user.sleeps = sleep;
           }
 
           user.save();
@@ -40,12 +40,12 @@ router.post("/create", verify, async (req, res) => {
 
 
 router.delete("/:id", verify, (req, res, next) => {
-  Weight.deleteOne({
+  Sleep.deleteOne({
     _id: req.params.id,
   })
     .then(() => {
       res.status(200).json({
-        weight: "Deleted!",
+        sleep: "Deleted!",
       });
     })
     .catch((error) => {
@@ -56,7 +56,7 @@ router.delete("/:id", verify, (req, res, next) => {
 });
 
 router.put("/update/:id", verify, async (req, res, next) => {
-  Weight.updateOne(
+  Sleep.updateOne(
     {
       _id: req.params.id,
     },
@@ -66,7 +66,7 @@ router.put("/update/:id", verify, async (req, res, next) => {
   )
     .then(() => {
       res.status(200).json({
-        weight: "Weight Updated",
+        sleep: "Sleep Updated",
       });
     })
     .catch((error) => {

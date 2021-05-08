@@ -7,7 +7,7 @@ import {
 import {connect} from 'react-redux';
 import {getTheme} from 'react-native-material-kit';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import {
   Text,
   Button
@@ -51,7 +51,7 @@ const ExerciseItem = (props) => {
   return (
     <View style={[theme.cardStyle, styles.card]}>
       <Image
-        source={require("../images/background.jpg")}
+        source={require("../../images/background.jpg")}
         style={[theme.cardImageStyle, styles.image]}
       />
       <Icon name={"user"} size={100} style={styles.icon} />

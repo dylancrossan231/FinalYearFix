@@ -36,24 +36,6 @@ export default (state = initialState, action) => {
           ...state,
           workoutExercises: [...state.workoutExercises, action.payload],
         };
-      // case "ADDWORKOUT_SET":
-      //   const index = state.workoutExercises.findIndex(
-      //     (item) => item.exercise === action.payload.id
-      //   );
-      //   return {
-      //     ...state,
-
-      //     workoutExercises: {
-      //       ...state.workoutExercises,
-      //       [index]: {
-      //         ...state.workoutExercises[index],
-      //         sets: [
-      //           ...state.workoutExercises[index].sets,
-      //           action.payload.setObject,
-      //         ],
-      //       },
-      //     },
-      //   };
 
       case "ADDWORKOUT_SET":
         const index = state.workoutExercises.findIndex(
@@ -67,11 +49,6 @@ export default (state = initialState, action) => {
           workoutExercises: [...workoutExercises],
         };
 
-      // let workoutExercises = state.workoutExercises;
-      // workoutExercises[index].sets = [
-      //   ...workoutExercises[index].sets,
-      //   action.payload.setObject,
-      // ];
       case "FORM_UPDATE_WORKOUT":
         return {
           ...state,

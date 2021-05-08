@@ -14,10 +14,24 @@ const UserSchema = new mongoose.Schema({
     min: 6,
     max: 1024,
   },
-  workouts: 
-  [{ 
-    type: Schema.Types.ObjectId, ref: "Workouts" 
-  }],
+  workouts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Workouts",
+    },
+  ],
+  weights: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Weights",
+    },
+  ],
+  sleeps: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Sleeps",
+    },
+  ],
   // first_name: {
   //   type: String,
   //   trim: true,

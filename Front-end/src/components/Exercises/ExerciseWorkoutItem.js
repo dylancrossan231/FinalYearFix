@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { ColoredRaisedButton, getTheme } from "react-native-material-kit";
 import Icon from "react-native-vector-icons/EvilIcons";
-import * as actions from "../actions";
+import * as actions from "../../actions";
 import { Text, Button,Label,Input,Form,Content,Item } from "native-base";
 import { render } from "react-dom";
 

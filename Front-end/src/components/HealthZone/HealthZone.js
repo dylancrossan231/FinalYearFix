@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import Icon from "react-native-vector-icons/EvilIcons";
-import * as actions from "../actions";
+import * as actions from "../../actions";
 import { Container, Header, Content, Card, CardItem, Text, Body, Button } from 'native-base';
-import {routes} from "./navigation_new/app-routes"
+import {routes} from "../navigation_new/app-routes"
 const styles = StyleSheet.create({
   useNativeDriver: true,
 
