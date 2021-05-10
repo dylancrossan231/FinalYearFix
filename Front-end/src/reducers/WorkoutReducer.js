@@ -43,13 +43,25 @@ export default (state = initialState, action) => {
         );
         let workoutExercises = state.workoutExercises;
 
-        workoutExercises[index].sets = [...workoutExercises[index].sets, action.payload.setObject];
+        workoutExercises[index].sets = [
+          ...workoutExercises[index].sets,
+          action.payload.setObject,
+        ];
         return {
           ...state,
           workoutExercises: [...workoutExercises],
         };
 
       case "FORM_UPDATE_WORKOUT":
+        return {
+          ...state,
+          [action.payload.prop]: action.payload.value,
+        };
+      case "FORM_UPDATE_REP":
+        workoutExercises = state.workoutExercises
+              // const index = workoutExercises.findIndex(
+              //   (item) => item.exercise === action.payload.exercise
+              // );
         return {
           ...state,
           [action.payload.prop]: action.payload.value,

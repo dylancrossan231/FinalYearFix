@@ -8,28 +8,26 @@ const WorkoutExercises = require("../models/Workout_Exercise");
 
 
 router.post("/create", verify, async (req, res) => {
-
+  //declaring our variables and setting them to the request body objects
   let workoutbody = req.body.workoutObject;
-  let workoutExercises = req.body.workoutExercises;
+  let workoutExercises = req.body.workoutObject.workoutExercises;
   let workoutName = workoutbody.workout.workout_name;
-  console.log(workoutName);
-  console.log(workoutExercises);
-  console.log(req.body);
+
+  //Check if the workout Name exists
   const checkWorkoutname = await Workout.findOne({
-
-    workoutName: workoutName,
-
+    workout_name: workoutName,
   });
-  // if (checkWorkoutname)
-  //   return res.status(400).send("Workout Name Already exists");
+  if (checkWorkoutname) {
+    return res.status(400).send("Workout Name Already exists");
+  }
 
-  //new workout
+  //New workout object created to be sent to the database
   const workout = new Workout({
-
     workout_name: workoutbody.workout.workout_name,
     user: req.user._id,
-
   });
+
+  //Request to save workout to the database and also save the workout to the users workouts
   try {
     const saveWorkout = await workout.save(function (err) {
       if (err) return console.log(err);
@@ -41,18 +39,21 @@ router.post("/create", verify, async (req, res) => {
           } else {
             user.workouts = workout;
           }
-
           user.save();
         })
         .catch((err) => console.log(err));
     });
+
+    //Saving all of the exercises and sets in the workoutExercises array to the Workout_exercise
+    //table in the database we loop through each element in the array and save one by one
     workoutExercises.forEach((workoutExercise) => {
-        if(workoutExercise.exercise){
-          workout.exercises.push(workoutExercise.exercise);
-        }
-        new WorkoutExercises(workoutExercise).save();
+      console.log(workoutExercise.exercise);
+      if (workoutExercise.exercise) {
+        workout.exercises.push(workoutExercise.exercise);
+      }
+      new WorkoutExercises(workoutExercise).save();
     });
-    console.log(req.body)
+    console.log(req.body);
     res.send(req.body);
   } catch (err) {
     res.status(400).send(err);

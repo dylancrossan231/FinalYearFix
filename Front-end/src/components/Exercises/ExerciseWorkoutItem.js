@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Image, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { ColoredRaisedButton, getTheme } from "react-native-material-kit";
@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/EvilIcons";
 import * as actions from "../../actions";
 import { Text, Button,Label,Input,Form,Content,Item } from "native-base";
 import { render } from "react-dom";
+import log from "react-native-log-to-file";
 
 const theme = getTheme();
 
@@ -44,13 +45,23 @@ const styles = StyleSheet.create({
   },
 });
 const ExerciseWorkoutItem = (props) => {
-  handleChangeOnReps = (e, setIndex) => {
-    // props.workoutExercises.map((item, index) => {
-      const index = props.workoutExercises.findIndex(
-        (item) => item.exercise === e.exercise,
-      );
 
-      console.log(e,index,setIndex);
+
+  function handleChangeOnReps(e){
+
+    console.log(e);
+
+    log.logToFile('Testing123').then(res => {
+      console.log(res);
+    });
+
+
+    // props.workoutExercises.map((item, index) => {
+      // const index = props.workoutExercises.findIndex(
+      //   (item) => item.exercise === e.exercise,
+      // );
+
+      // console.log(e,index,setIndex);
   //     // let currentRepField = e.target.value;
 
   //     // const updateRepState = props.workoutExercise.filter(
@@ -63,6 +74,16 @@ const ExerciseWorkoutItem = (props) => {
   //     // })
     // });
   };
+
+
+  // (value) =>
+  //   props.formUpdateRep({
+  //     prop: workoutExercise,
+  //     value,
+  //   });
+
+
+
   return (
     <View style={[theme.cardStyle, styles.card]}>
       <Button
@@ -76,6 +97,8 @@ const ExerciseWorkoutItem = (props) => {
       </Button>
 
       {props.workoutExercise.sets.map((item, index) => {
+
+        const [rep, setRep] = useState('');
         return (
           <Content>
             <Form style={{ flexDirection: "row" }} key={index}>
@@ -89,7 +112,7 @@ const ExerciseWorkoutItem = (props) => {
                   rounded
                   style={styles.textFieldStyle}
                   placeholder={"rep field"}
-                  value=""
+                  value={rep}
                 >
                   {/* {console.log(props.workoutExercises[index])} */}
 
@@ -102,9 +125,7 @@ const ExerciseWorkoutItem = (props) => {
                     data-id={index}
                     id={index}
                     className="rep"
-                    onChange={handleChangeOnReps(
-                      props.workoutExercises,index
-                    )}
+                    onChange={handleChangeOnReps}
                   />
                 </Item>
               </Content>

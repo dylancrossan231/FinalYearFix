@@ -37,7 +37,6 @@ class loginScreen extends Component {
                 value={this.props.email}
               >
                 <Input
-                  value="test@test.ie"
                   onChangeText={(value) =>
                     this.props.formUpdate({ prop: "email", value })
                   }
@@ -53,7 +52,7 @@ class loginScreen extends Component {
                 value={this.props.password}
               >
                 <Input
-                  value="secret123"
+                  
                   onChangeText={(value) =>
                     this.props.formUpdate({ prop: "password", value })
                   }

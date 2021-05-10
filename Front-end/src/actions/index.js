@@ -24,7 +24,7 @@ export const createNewContact = ({email, password, first_name, last_name, userna
   return (dispatch) => {
 
 
-    fetch("http://192.168.1.22:300/api/user/register", {
+    fetch("http://192.168.1.19:300/api/user/register", {
       method: "POST",
 
       headers: {
@@ -53,7 +53,7 @@ export const createNewContact = ({email, password, first_name, last_name, userna
 
 export const loadInitialContacts = () => {
   return (dispatch) => {
-    fetch("http://192.168.1.22:3000/contacts")
+    fetch("http://192.168.1.19:3000/contacts")
       .then((response) => {
         return response.json();
       })
@@ -70,15 +70,16 @@ export const login = ({email, password}) => {
       password: password,
     };
     console.log("yeehawlogin")
-    fetch("http://192.168.1.22:3000/api/user/login", {
+    fetch("http://192.168.1.19:3000/api/user/login", {
       method: "POST",
       body: JSON.stringify({ email: email, password: password }),
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
+      
       .then((data) => {
         console.log(data);
         AsyncStorage.setItem("token", data.token);
@@ -91,7 +92,7 @@ export const login = ({email, password}) => {
 export const loadInitialWorkouts = (token) => {
   return (dispatch) => {
     dispatch({type: 'SET_LOADING'});
-    fetch("http://192.168.1.22:3000/api/workouts", {
+    fetch("http://192.168.1.19:3000/api/workouts", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -117,10 +118,10 @@ export const loadInitialWorkouts = (token) => {
 export const loadInitialExercises = (token) => {
   return (dispatch) => {
     dispatch({ type: "SET_LOADING" });
-    fetch("http://192.168.1.22:3000/api/exercises", {
+    fetch("http://192.168.1.19:3000/api/exercises", {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
         "auth-token": token,
       },
@@ -158,7 +159,7 @@ export const createNewWorkout = ({
     }
     console.log(workoutObject)
 
-    fetch("http://192.168.1.22:3000/api/workouts/create", {
+    fetch("http://192.168.1.19:3000/api/workouts/create", {
       method: "POST",
 
       headers: {
@@ -210,7 +211,7 @@ export const formUpdateWorkout = ({ prop, value }) => {
 
 export const loadInitialWeights = (token) => {
   return (dispatch) => {
-    fetch("http://192.168.1.22:3000/api/weights", {
+    fetch("http://192.168.1.19:3000/api/weights", {
       method: "GET",
       headers: {
         "Accept": "application/json",
@@ -237,7 +238,7 @@ export const loadInitialWeights = (token) => {
 
 export const deleteWeight = (token,id) => {
   return (dispatch) => {
-        fetch(`http://192.168.1.22:3000/api/weights/${id}`, {
+        fetch(`http://192.168.1.19:3000/api/weights/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -257,7 +258,7 @@ export const deleteWeight = (token,id) => {
 };
 // export const createNewWeight = ({ weight, token }) => {
 //   return (dispatch) => {
-//     fetch("http://192.168.1.22:3000/api/weights/create", {
+//     fetch("http://192.168.1.19:3000/api/weights/create", {
 //       method: "POST",
 //       headers: {
 //         "Accept": "application/json",
@@ -279,7 +280,7 @@ export const deleteWeight = (token,id) => {
 export const createNewWeight = ({ weight, token }) => {
   console.log(weight)
   return (dispatch) => {
-    fetch("http://192.168.1.22:3000/api/weights/create", {
+    fetch("http://192.168.1.19:3000/api/weights/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -313,7 +314,7 @@ export const createNewWeight = ({ weight, token }) => {
 //     weight: weight
 //   }
 //   return (dispatch) => {
-//     fetch(`http://192.168.1.22:3000/api/weights/update/${id}`, {
+//     fetch(`http://192.168.1.19:3000/api/weights/update/${id}`, {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -345,7 +346,7 @@ export const updateWeight = ({ weightNew, token, id }) => {
     id: id,
   };
   return (dispatch) => {
-    fetch(`http://192.168.1.22:3000/api/weight/update/${id}`, {
+    fetch(`http://192.168.1.19:3000/api/weight/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -373,7 +374,12 @@ export const updateWeight = ({ weightNew, token, id }) => {
   };
 };
 
-
+export const formUpdateRep = ({ prop, value }) => {
+  return {
+    type: "FORM_UPDATE_Rep",
+    payload: { prop, value },
+  };
+};
 export const formUpdateWeight = ({ prop, value }) => {
   return {
     type: "FORM_UPDATE_WEIGHT",
@@ -400,7 +406,7 @@ export const passWeightAndID = ({ weight, id }) => {
 
 export const loadInitialSleeps = (token) => {
   return (dispatch) => {
-    fetch("http://192.168.1.22:3000/api/sleep", {
+    fetch("http://192.168.1.19:3000/api/sleep", {
       method: "GET",
       headers: {
         "Accept": "application/json",
@@ -427,7 +433,7 @@ export const loadInitialSleeps = (token) => {
 export const deleteSleep = (token, id) => {
   console.log(id,token)
   return (dispatch) => {
-    fetch(`http://192.168.1.22:3000/api/sleep/${id}`, {
+    fetch(`http://192.168.1.19:3000/api/sleep/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -450,7 +456,7 @@ export const deleteSleep = (token, id) => {
 export const createNewSleep = ({ hours, minutes, token }) => {
 
   return (dispatch) => {
-    fetch("http://192.168.1.22:3000/api/sleep/create", {
+    fetch("http://192.168.1.19:3000/api/sleep/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -487,7 +493,7 @@ export const updateSleep = ({ hours,minutes, token, id }) => {
   };
   console.log(hours,minutes);
   return (dispatch) => {
-    fetch(`http://192.168.1.22:3000/api/sleep/update/${id}`, {
+    fetch(`http://192.168.1.19:3000/api/sleep/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
