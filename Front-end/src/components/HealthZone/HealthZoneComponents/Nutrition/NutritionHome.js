@@ -68,7 +68,7 @@ class NutritionHome extends Component {
     // this.props.navigation.dangerouslyGetParent().setOptions({
     //   tabBarVisible: true,
     // });
-    this.props.loadInitialNutritions(this.props.token);
+    this.props.loadInitialNutritions(this.props.token,this.props.user);
   }
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
@@ -145,6 +145,7 @@ const mapStateToProps = (state) => {
     loading: state.nutrition.loading,
     error: state.nutrition.error,
     token: state.people.token,
+    user: state.people._id,
   };
 };
 

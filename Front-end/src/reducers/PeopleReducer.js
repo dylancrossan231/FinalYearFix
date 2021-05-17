@@ -1,6 +1,7 @@
 const initialState = {
     detailView: false,
     personSelected: null,
+    _id: "",
     email: '',
     password: '',
     token: '',
@@ -59,7 +60,7 @@ export default (state = initialState, action) => {
               ...state,
               token: action.payload.token,
               email: action.payload.email,
-              _id: action.payload._id,
+              _id: action.payload.user_id,
               password: "",
               error: "",
               isLoading: false

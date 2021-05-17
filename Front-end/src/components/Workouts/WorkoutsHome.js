@@ -20,7 +20,7 @@ class WorkoutsHome extends Component {
         this.props.navigation.dangerouslyGetParent().setOptions({
           tabBarVisible: true,
         });
-    this.props.loadInitialWorkouts(this.props.token);
+    this.props.loadInitialWorkouts(this.props.token,this.props.user);
 
   }
 
@@ -72,6 +72,7 @@ const mapStateToProps = (state) => {
     loading: state.workout.loading,
     error: state.workout.error,
     token: state.people.token,
+    user: state.people._id,
   };
 };
 

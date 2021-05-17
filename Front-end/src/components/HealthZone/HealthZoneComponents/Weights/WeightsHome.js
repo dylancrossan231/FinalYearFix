@@ -63,7 +63,7 @@ class WeightsHome extends Component {
     // this.props.navigation.dangerouslyGetParent().setOptions({
     //   tabBarVisible: true,
     // });
-    this.props.loadInitialWeights(this.props.token);
+    this.props.loadInitialWeights(this.props.token,this.props.user);
   }
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
@@ -140,6 +140,7 @@ const mapStateToProps = (state) => {
     loading: state.weight.loading,
     error: state.weight.error,
     token: state.people.token,
+    user: state.people._id
   };
 };
 

@@ -11,9 +11,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "INITIAL_FETCH_NUTRITION":
+      state.nutritions = action.payload.nutritions;
+      const usersNutritionArray = state.nutritions.filter(
+        (item) => item.user === action.payload.user
+      );
+      console.log(usersNutritionArray);
       return {
         ...state,
-        nutritions: action.payload,
+        nutritions: usersNutritionArray,
       };
     // case "SET_LOADING":
     //   return {

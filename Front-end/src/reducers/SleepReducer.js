@@ -10,9 +10,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "INITIAL_FETCH_SLEEPS":
+              state.sleeps = action.payload.sleeps;
+              const usersSleepsArray = state.sleeps.filter(
+                (item) => item.user === action.payload.user
+              );
+              console.log(usersSleepsArray);
+
       return {
         ...state,
-        sleeps: action.payload,
+        sleeps: usersSleepsArray,
       };
     // case "SET_LOADING":
     //   return {

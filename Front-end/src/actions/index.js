@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { State } from 'react-native-gesture-handler';
 
 export const selectPerson = (peopleId) => {
   return {
@@ -89,7 +90,7 @@ export const login = ({email, password}) => {
   };
 };
 
-export const loadInitialWorkouts = (token) => {
+export const loadInitialWorkouts = (token,user) => {
   return (dispatch) => {
     dispatch({type: 'SET_LOADING'});
     fetch("http://192.168.1.19:3000/api/workouts", {
@@ -104,7 +105,11 @@ export const loadInitialWorkouts = (token) => {
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "INITIAL_FETCH_WORKOUTS", payload: data });
+        dispatch({
+          type: "INITIAL_FETCH_WORKOUTS",
+          payload: { workouts: data,
+                    user: user },
+        });
       })
       .catch((error) => {
         console.log("error load workouts!", error);
@@ -209,7 +214,9 @@ export const formUpdateWorkout = ({ prop, value }) => {
 };
 
 
-export const loadInitialWeights = (token) => {
+export const loadInitialWeights = (token,user) => {
+  console.log(user)
+  
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/weights", {
       method: "GET",
@@ -224,7 +231,11 @@ export const loadInitialWeights = (token) => {
 
       })
       .then((data) => {
-        dispatch({ type: "INITIAL_FETCH_WEIGHTS", payload: data });
+        dispatch({ type: "INITIAL_FETCH_WEIGHTS", 
+        payload:{ 
+          weights:data,
+          user: user
+         }});
       })
       .catch((error) => {
         console.log("error load weights!", error);
@@ -374,7 +385,7 @@ export const passWeightAndID = ({ weight, id }) => {
 
 
 
-export const loadInitialSleeps = (token) => {
+export const loadInitialSleeps = (token,user) => {
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/sleep", {
       method: "GET",
@@ -388,7 +399,7 @@ export const loadInitialSleeps = (token) => {
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "INITIAL_FETCH_SLEEPS", payload: data });
+        dispatch({ type: "INITIAL_FETCH_SLEEPS", payload:{sleeps:data, user: user}  });
       })
       .catch((error) => {
         console.log("error load sleeps!", error);
@@ -507,7 +518,7 @@ export const passHoursMinutesAndID = ({ hours, minutes, id }) => {
 
 
 
-export const loadInitialNutritions = (token) => {
+export const loadInitialNutritions = (token,user) => {
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/nutrition", {
       method: "GET",
@@ -521,7 +532,10 @@ export const loadInitialNutritions = (token) => {
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "INITIAL_FETCH_NUTRITION", payload: data });
+        dispatch({
+          type: "INITIAL_FETCH_NUTRITION",
+          payload: { nutritions: data,user: user },
+        });
       })
       .catch((error) => {
         console.log("error load nutritions!", error);

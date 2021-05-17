@@ -3,15 +3,21 @@ const initialState = {
   loading: false,
   error: null,
   weight: "",
-  updateId: ""
+  updateId: "",
+  
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case "INITIAL_FETCH_WEIGHTS":
+        
+        state.weights = action.payload.weights
+        const usersWeightsArray = state.weights.filter((item) => item.user === action.payload.user);
+        console.log(usersWeightsArray);
+
       return {
         ...state,
-        weights: action.payload,
+        weights: usersWeightsArray
       };
     // case "SET_LOADING":
     //   return {

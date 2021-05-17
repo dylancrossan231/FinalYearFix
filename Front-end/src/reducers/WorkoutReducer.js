@@ -25,9 +25,15 @@ export default (state = initialState, action) => {
         };
 
       case "INITIAL_FETCH_WORKOUTS":
+        state.workouts = action.payload.workouts;
+        const usersWorkoutsArray = state.workouts.filter(
+          (item) => item.user === action.payload.user
+        );
+        console.log(usersWorkoutsArray);
+
         return {
           ...state,
-          workouts: action.payload,
+          workouts: usersWorkoutsArray,
           loading: false,
           error: null,
         };

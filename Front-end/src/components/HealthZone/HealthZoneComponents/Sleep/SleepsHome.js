@@ -63,7 +63,7 @@ class SleepsHome extends Component {
     // this.props.navigation.dangerouslyGetParent().setOptions({
     //   tabBarVisible: true,
     // });
-    this.props.loadInitialSleeps(this.props.token);
+    this.props.loadInitialSleeps(this.props.token,this.props.user);
   }
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
@@ -140,6 +140,7 @@ const mapStateToProps = (state) => {
     loading: state.sleep.loading,
     error: state.sleep.error,
     token: state.people.token,
+    user: state.people._id,
   };
 };
 
