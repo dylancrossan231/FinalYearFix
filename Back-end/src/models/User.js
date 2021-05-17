@@ -32,6 +32,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Sleeps",
     },
   ],
+  nutritions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Nutrition",
+    },
+  ],
   // first_name: {
   //   type: String,
   //   trim: true,

@@ -56,33 +56,6 @@ router.delete("/:id", verify, (req, res, next) => {
       });
     });
 });
-// const updateComment = async function (req, res, next) {
-//   try {
-//     const article = await Article.findById(req.params.articleId).exec();
-//     const comment = await Comment.findById(req.params.commentId).exec();
-
-//     if (article === null) {
-//       res.status(404).json({
-//         success: false,
-//         message: "Article not found",
-//       });
-//     } else if (comment === null) {
-//       res.status(404).json({
-//         success: false,
-//         message: "comment not found",
-//       });
-//     } else {
-//       comment.body = req.body.body;
-//       comment.save();
-//       comment.author = req.user;
-//       res.status(200).json(comment);
-//     }
-//   } catch (error) {
-//     res.status(500).json({
-//       error: error.message,
-//     });
-//   }
-// };
 router.put("/update/:id", verify, async (req, res, next) => {
  try {
    const sleep = await Sleep.findById(req.params.id).exec();

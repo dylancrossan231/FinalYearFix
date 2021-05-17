@@ -39,41 +39,62 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-
-class UpdateWeight extends Component {
-
-  onPressUpdateWeight() {
-    const { weight } = this.props;
-
-    console.log(weight, this.props.updateId, this.props.token);
-    this.props.updateWeight({
-      weight,
+class UpdateNutrition extends Component {
+  onPressUpdateNutrition() {
+    const { protein, carbohydrate, fats } = this.props;
+    this.props.updateNutrition({
+      protein,
+      carbohydrate,
+      fats,
       token: this.props.token,
       id: this.props.updateId,
     });
-    this.props.navigation.navigate(routes.WEIGHTS_HOME);
+    this.props.navigation.navigate(routes.NUTRITION_HOME);
   }
+
   render() {
-    const{weight} = this.props;
+    const { protein, carbohydrate, fats } = this.props;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <Container>
           <View style={styles.form}>
-            <Text>Update Weight</Text>
+            <Text>Update Nutrition</Text>
 
             <Content>
               <Item rounded style={styles.textFieldStyle}>
                 <Input
-                  value={weight.toString()}
+                  value={protein.toString()}
                   onChangeText={(value) =>
-                    this.props.formUpdateWeight({
-                      prop: "weight",
+                    this.props.formUpdateNutrition({
+                      prop: "protein",
                       value,
                     })
                   }
-                  placeholder="Enter your Weight"
+                  placeholder="Enter your protein"
+                />
+              </Item>
+              <Item rounded style={styles.textFieldStyle}>
+                <Input
+                  value={carbohydrate.toString()}
+                  onChangeText={(value) =>
+                    this.props.formUpdateNutrition({
+                      prop: "carbohydrate",
+                      value,
+                    })
+                  }
+                  placeholder="Enter your carbohydrate"
+                />
+              </Item>
+              <Item rounded style={styles.textFieldStyle}>
+                <Input
+                  value={fats.toString()}
+                  onChangeText={(value) =>
+                    this.props.formUpdateNutrition({
+                      prop: "fats",
+                      value,
+                    })
+                  }
+                  placeholder="Enter your fats"
                 />
               </Item>
               <Button
@@ -81,7 +102,7 @@ class UpdateWeight extends Component {
                 rounded
                 title="Update"
                 style={styles.btnStyle}
-                onPress={this.onPressUpdateWeight.bind(this)}
+                onPress={this.onPressUpdateNutrition.bind(this)}
               >
                 <Text style={styles.btnText}>Finish</Text>
               </Button>
@@ -94,8 +115,8 @@ class UpdateWeight extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { weight, updateId } = state.weight;
-  return { weight, updateId, token: state.people.token };
+  const { protein,carbohydrate,fats, updateId } = state.nutrition;
+  return { protein, carbohydrate, fats, updateId, token: state.people.token };
 };
 
-export default connect(mapStateToProps, actions)(UpdateWeight);
+export default connect(mapStateToProps, actions)(UpdateNutrition);

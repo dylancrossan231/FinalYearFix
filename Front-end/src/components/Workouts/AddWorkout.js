@@ -74,8 +74,8 @@ class AddWorkout extends Component {
       exercise: id,
       sets: [
         {
-          rep: "22",
-          weight: "22",
+          rep: "",
+          weight: "",
         },
       ],
     };
@@ -95,7 +95,6 @@ class AddWorkout extends Component {
   //   })
 
   // };
-
   render() {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>

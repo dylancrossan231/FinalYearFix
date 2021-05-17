@@ -45,45 +45,37 @@ const styles = StyleSheet.create({
   },
 });
 const ExerciseWorkoutItem = (props) => {
-
-
   function handleChangeOnReps(e){
-
     console.log(e);
 
-    log.logToFile('Testing123').then(res => {
+    log.logToFile("Testing123").then((res) => {
       console.log(res);
     });
 
-
     // props.workoutExercises.map((item, index) => {
-      // const index = props.workoutExercises.findIndex(
-      //   (item) => item.exercise === e.exercise,
-      // );
+    // const index = props.workoutExercises.findIndex(
+    //   (item) => item.exercise === e.exercise,
+    // );
 
-      // console.log(e,index,setIndex);
-  //     // let currentRepField = e.target.value;
+    // console.log(e,index,setIndex);
+    //     // let currentRepField = e.target.value;
 
-  //     // const updateRepState = props.workoutExercise.filter(
-  //     //   (item, index) => item.exercise === currentRepField.exercise
-  //     // );
-  //     // console.log("yeehaw")
-  //     // props.formUpdateWorkout({
-  //     //   prop: props.workoutExercise[index],
-  //     //   value,
-  //     // })
+    //     // const updateRepState = props.workoutExercise.filter(
+    //     //   (item, index) => item.exercise === currentRepField.exercise
+    //     // );
+    //     // console.log("yeehaw")
+    //     // props.formUpdateWorkout({
+    //     //   prop: props.workoutExercise[index],
+    //     //   value,
+    //     // })
     // });
+
+    // (value) =>
+    //   props.formUpdateRep({
+    //     prop: workoutExercise,
+    //     value,
+    //   });
   };
-
-
-  // (value) =>
-  //   props.formUpdateRep({
-  //     prop: workoutExercise,
-  //     value,
-  //   });
-
-
-
   return (
     <View style={[theme.cardStyle, styles.card]}>
       <Button
@@ -153,92 +145,6 @@ const ExerciseWorkoutItem = (props) => {
           </Content>
         );
       })}
-      {/* <FlatList
-        data={props.workoutExercise.sets}
-        renderItem={({ item, index }) => (
-          
-          
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      /> */}
-      {/* {props.workoutExercise.sets.map((currentSet, indexSet) => {
-
-        return (
-          <Form key={indexSet} style={{ flexDirection: "row" }}>
-            <Content>
-              <Text>Set {indexSet + 1}</Text>
-            </Content>
-
-            <Content style={{ flex: 1 }}>
-              <Item
-                rounded
-                style={styles.textFieldStyle}
-                placeholder={"rep field"}
-                value=""
-              >
-                <Label htmlFor={indexSet}>
-                  <Text>Reps</Text>
-                </Label>
-                <Input
-                  type="text"
-                  name={indexSet}
-                  data-id={indexSet}
-                  id={indexSet}
-                  className="rep"
-                  onChangeText={(value) =>
-                    props.formUpdateWorkout({
-                      prop: currentSet.rep,
-                      value,
-                    })
-                  }
-                />
-              </Item>
-            </Content>
-
-            <Content>
-              <Item
-                rounded
-                style={styles.textFieldStyle}
-                placeholder={"weight field"}
-                value=""
-              >
-                <Label htmlFor={indexSet}>
-                  <Text>Weight</Text>
-                </Label>
-                <Input
-                  type="text"
-                  name={indexSet}
-                  data-id={indexSet}
-                  id={indexSet}
-                  className="weight"
-                  onChangeText={(value) =>
-                    props.formUpdateWorkout({
-                      prop: currentSet.rep,
-                      value,
-                    })
-                  }
-                />
-              </Item>
-            </Content>
-
-            <Content>
-              <Item>
-                <Button
-                  block
-                  rounded
-                  title="Add Set"
-                  style={styles.btnStyle}
-                  onPress={() =>
-                    props.addSet(props.workoutExercise.exercise)
-                  }
-                >
-                  <Text>Add Set</Text>
-                </Button>
-              </Item>
-            </Content>
-          </Form>
-        );
-      })} */}
     </View>
   );
 };

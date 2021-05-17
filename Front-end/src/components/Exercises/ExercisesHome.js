@@ -23,11 +23,8 @@ class ExercisesHome extends Component {
 state = {
 prevScreen: ""
 }
-
   componentDidMount() {
-    
 let [previousScreen] = this.props.navigation.dangerouslyGetState().routes
-
 if (previousScreen.state) {
       this.props.navigation.setOptions({
         tabBarVisible: false,
@@ -36,7 +33,6 @@ if (previousScreen.state) {
   this.setState({
     prevScreen: name,
   });
-
 } else if (previousScreen.name === "Main" && previousScreen.params ) {
 
   const name2 = previousScreen.params.screen;

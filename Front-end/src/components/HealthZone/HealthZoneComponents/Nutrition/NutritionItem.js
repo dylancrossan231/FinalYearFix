@@ -54,30 +54,48 @@ const styles = StyleSheet.create({
   },
 });
 
-const WeightsItem = (props) => {
+const NutritionItem = (props) => {
   
   return (
     <Content>
       <Card>
         <CardItem header>
-          <Text>Date Created: {props.weight.created_date}</Text>
+          <Text>Date Created: {props.nutrition.created_date}</Text>
         </CardItem>
         <CardItem>
           <Body>
-            <Text>{props.weight.weight} KG</Text>
+            <Text>{props.nutrition.protein} protein</Text>
+            <Text>{props.nutrition.carbohydrate} carbohydrate</Text>
+            <Text>{props.nutrition.fats} fats</Text>
+            <Text>{props.nutrition.calories} calories</Text>
           </Body>
         </CardItem>
         <CardItem footer>
           <Button
-            onPress={() => props.deleteWeight(props.token, props.weight._id)}
+            onPress={() =>
+              props.deleteNutrition(props.token, props.nutrition._id)
+            }
           >
             <Icon name="delete" size={40} />
           </Button>
           <Button
             style={styles.buttonSpacing}
             onPress={() =>
-              props.onPressNavigateUpdate(props.weight.weight, props.weight._id, props)
+              props.onPressNavigateUpdate(
+                props.nutrition.protein,
+                props.nutrition.carbohydrate,
+                props.nutrition.fats,
+                props.nutrition._id,
+                props
+              )
             }
+
+            // onPress={() =>
+            //   props.navigation.navigate(routes.HEALTH_ZONE, {
+            //     screen: routes.UPDATE_WEIGHT,
+            //     params: { weight: props.weight.weight, _id: props.weight._id },
+            //   })
+            // }
           >
             <Icon name="edit" size={40} />
           </Button>
@@ -87,5 +105,5 @@ const WeightsItem = (props) => {
   );
 };
 
-export default connect(null, actions)(WeightsItem);
+export default connect(null, actions)(NutritionItem);
             

@@ -16,7 +16,7 @@ import {
 
 } from "native-base";
 import Icon from "react-native-vector-icons/AntDesign";
-import SleepsItem from "./SleepsItem";
+import NutritionItem from "./NutritionItem";
 
 
 const styles = StyleSheet.create({
@@ -53,17 +53,22 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
 });
-class SleepsHome extends Component {
-  onPressNavigateUpdate(hours,minutes, id, props) {
-    props.passHoursMinutesAndID({ hours: hours, minutes, id: id });
-    props.navigation.navigate(routes.UPDATE_SLEEP)
+class NutritionHome extends Component {
+  onPressNavigateUpdate(protein,carbohydrate,fats, id, props) {
+    props.passNutritionVariables({
+      protein: protein,
+      carbohydrate: carbohydrate,
+      fats: fats,
+      id: id,
+    });
+    props.navigation.navigate(routes.UPDATE_NUTRITION)
   }
 
   componentDidMount() {
     // this.props.navigation.dangerouslyGetParent().setOptions({
     //   tabBarVisible: true,
     // });
-    this.props.loadInitialSleeps(this.props.token);
+    this.props.loadInitialNutritions(this.props.token);
   }
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
@@ -71,8 +76,8 @@ class SleepsHome extends Component {
     ),
   };
   render() {
-    const { error, sleeps } = this.props;
-    if (!error && sleeps.length === 0)
+    const { error, nutritions } = this.props;
+    if (!error && nutritions.length === 0)
       return (
         <View>
           <Button
@@ -82,10 +87,10 @@ class SleepsHome extends Component {
             <Icon name="arrowleft" size={50} />
           </Button>
 
-          <Text>You have no Sleep recorded yet</Text>
+          <Text>You have no nutrition recorded yet</Text>
           <Button
             style={{ position: "absolute", right: 0 }}
-            onPress={() => this.props.navigation.navigate(routes.ADD_SLEEP)}
+            onPress={() => this.props.navigation.navigate(routes.ADD_NUTRITION)}
           >
             <Icon name="plussquareo" size={50} />
           </Button>
@@ -97,7 +102,7 @@ class SleepsHome extends Component {
           <Text>{error}</Text>
           <Button
             title="Retry"
-            onPress={() => this.props.loadInitialSleeps(token)}
+            onPress={() => this.props.loadInitialNutritions(token)}
           />
         </View>
       );
@@ -106,7 +111,7 @@ class SleepsHome extends Component {
         <View style={styles.container}>
           <Button
             style={{ position: "absolute", right: 0 }}
-            onPress={() => this.props.navigation.navigate(routes.ADD_SLEEP)}
+            onPress={() => this.props.navigation.navigate(routes.ADD_NUTRITION)}
           >
             <Icon name="plussquareo" size={50} />
           </Button>
@@ -115,18 +120,18 @@ class SleepsHome extends Component {
             <Icon name="arrowleft" size={50} />
           </Button>
           <FlatList
-            data={sleeps}
+            data={nutritions}
             renderItem={({ item }) => (
-              <SleepsItem
-                sleep={item}
+              <NutritionItem
+                nutrition={item}
                 token={this.props.token}
                 navigation={this.props.navigation}
                 onPressNavigateUpdate={this.onPressNavigateUpdate}
-                passHoursMinutesAndID={this.props.passHoursMinutesAndID}
+                passNutritionVariables={this.props.passNutritionVariables}
               />
             )}
-            keyExtractor={(hours, index) => index.toString()}
-            deleteSleep={this.props.deleteSleep}
+            keyExtractor={(calories, index) => index.toString()}
+            deleteNutrition={this.props.deleteNutrition}
           />
         </View>
       </Container>
@@ -136,11 +141,11 @@ class SleepsHome extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sleeps: state.sleep.sleeps,
-    loading: state.sleep.loading,
-    error: state.sleep.error,
+    nutritions: state.nutrition.nutritions,
+    loading: state.nutrition.loading,
+    error: state.nutrition.error,
     token: state.people.token,
   };
 };
 
-export default connect(mapStateToProps, actions)(SleepsHome);
+export default connect(mapStateToProps, actions)(NutritionHome);

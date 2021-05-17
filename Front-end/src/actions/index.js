@@ -309,37 +309,7 @@ export const createNewWeight = ({ weight, token }) => {
   };
 };
 
-// export const updateWeight = ({ weight, token, id }) => {
-//   const newWeight = {
-//     weight: weight
-//   }
-//   return (dispatch) => {
-//     fetch(`http://192.168.1.19:3000/api/weights/update/${id}`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Accept": "application/json",
-//         "auth-token": token,
-//       },
-//       body: JSON.stringify(
-//         newWeight
-//       ),
-//     })
-//       .then((response) => {
-//         return response.json();
-//       })
-//       .then((data) => {
-//         dispatch({ type: "UPDATE_WEIGHT", payload: data });
-//       })
-//       .catch((error) => {
-//         console.log("error updating weight!", error)
-//         return dispatch({
-//           type: "SET_ERROR",
-//           payload: "Error: Could not connect to the server",
-//         });
-//       });
-//   };
-// };
+
 export const updateWeight = ({ weightNew, token, id }) => {
   const weight = {
     weight:weightNew,
@@ -532,5 +502,155 @@ export const passHoursMinutesAndID = ({ hours, minutes, id }) => {
   return {
     type: "PASS_HOURS_MINUTES_AND_ID_TO_STATE",
     payload: { hours, minutes, id },
+  };
+};
+
+
+
+export const loadInitialNutritions = (token) => {
+  return (dispatch) => {
+    fetch("http://192.168.1.19:3000/api/nutrition", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "auth-token": token,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "INITIAL_FETCH_NUTRITION", payload: data });
+      })
+      .catch((error) => {
+        console.log("error load nutritions!", error);
+        return dispatch({
+          type: "SET_ERROR",
+          payload: "Error: Could not connect to the server",
+        });
+      });
+  };
+};
+
+export const deleteNutrition = (token, id) => {
+  console.log(id, token);
+  return (dispatch) => {
+    fetch(`http://192.168.1.19:3000/api/nutrition/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+    }).then((data) => {
+      dispatch({ type: "DELETE_NUTRITION", payload: { _id: id } }).catch(
+        (error) => {
+          return dispatch({
+            type: "SET_ERROR_NUTRITION",
+            payload: "Error: Could not connect to the server",
+          });
+        }
+      );
+    });
+  };
+};
+
+export const createNutrition = ({ protein, carbohydrate, fats, token }) => {
+  console.log(protein, carbohydrate)
+    const addNutrition = parseInt(protein) + parseInt(carbohydrate);
+    console.log(addNutrition ," nutrition add");
+
+    const nutritionVariable = addNutrition * 4;
+    const nutritionVariable2 = parseInt(fats) * 9; 
+    console.log(nutritionVariable, nutritionVariable2)
+    const calories = nutritionVariable + nutritionVariable2;
+  return (dispatch) => {
+    fetch("http://192.168.1.19:3000/api/nutrition/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify({
+        protein: protein,
+        carbohydrate: carbohydrate,
+        fats: fats,
+        calories: calories,
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "NEW_NUTRITION", payload: data });
+      })
+      .catch((error) => {
+        console.log("error load nutrition!", error);
+        return dispatch({
+          type: "SET_ERROR",
+          payload: "Error: Could not connect to the server",
+        });
+      });
+  };
+};
+
+export const updateNutrition = ({ protein, carbohydrate, fats, token, id }) => {
+  console.log(protein, carbohydrate);
+  const addNutrition = parseInt(protein) + parseInt(carbohydrate);
+  console.log(addNutrition, " nutrition add");
+  const nutritionVariable = addNutrition * 4;
+  const nutritionVariable2 = parseInt(fats) * 9;
+  console.log(nutritionVariable, nutritionVariable2);
+  const calories = nutritionVariable + nutritionVariable2;
+  const nutrition = {
+    protein: protein,
+    carbohydrate: carbohydrate,
+    fats: fats,
+    calories: calories,
+    id: id,
+  };
+  return (dispatch) => {
+    fetch(`http://192.168.1.19:3000/api/nutrition/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify(nutrition),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch({
+          type: "UPDATE_NUTRITION",
+          payload: {
+            res,
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_NUTRITION",
+          payload: error,
+        });
+      });
+  };
+};
+
+export const formUpdateNutrition = ({ prop, value }) => {
+  return {
+    type: "FORM_UPDATE_NUTRITION",
+    payload: { prop, value },
+  };
+};
+export const passNutritionVariables = ({ protein, carbohydrate, fats, id }) => {
+  console.log(protein, carbohydrate, fats, id);
+  return {
+    type: "PASS_NUTRITION_VARIABLES_TO_STATE",
+    payload: { protein, carbohydrate, fats, id },
   };
 };

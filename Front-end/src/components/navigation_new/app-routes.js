@@ -12,6 +12,7 @@ export const routes = {
   HOME_WORKOUT: "HOMEWORKOUT",
   COMPANY_HOME: "CompanyHome",
   PEOPLE: "People",
+
   //StackNavigation for HealthZone
   HEALTH_ZONE: "HEALTHZONE",
   //Routes
@@ -24,8 +25,10 @@ export const routes = {
   SLEEP_HOME: "SLEEP_HOME",
   ADD_SLEEP: "ADD_SLEEP",
   UPDATE_SLEEP: "UPDATE_SLEEP",
-  //CALORIES
-  CALORIEZONE: "CALORIEZONE",
+  //NUTRITION
+  NUTRITION_HOME: "NUTRITION_HOME",
+  ADD_NUTRITION: "ADD_NUTRITION",
+  UPDATE_NUTRITION: "UPDATE_NUTRITION",
 
   //TabNavigatorMain
   MAINTAB: "MainTab",

@@ -14,6 +14,7 @@ const workoutsRoute = require('./src/routes/workouts')
 const exercisesRoute = require('./src/routes/exercises')
 const weightsRoute = require("./src/routes/weights")
 const sleepRoute = require("./src/routes/sleep");
+const nutritionRoute = require("./src/routes/nutrition");
 
 
 const PORT = 3000;
@@ -30,6 +31,8 @@ app.use("/api/exercises", exercisesRoute);
 app.use('/api/workouts', workoutsRoute);
 app.use("/api/weights", weightsRoute);
 app.use("/api/sleep", sleepRoute);
+app.use("/api/nutrition", nutritionRoute);
+
 
 
 // bodyparser setup

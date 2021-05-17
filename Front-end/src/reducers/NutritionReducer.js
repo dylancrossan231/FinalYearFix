@@ -1,54 +1,56 @@
 const initialState = {
-  weights: [],
+  nutritions: [],
   loading: false,
   error: null,
-  weight: "",
-  updateId: ""
+  protein: "",
+  carbohydrate: "",
+  fats: "",
+  updateId: "",
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "INITIAL_FETCH_WEIGHTS":
+    case "INITIAL_FETCH_NUTRITION":
       return {
         ...state,
-        weights: action.payload,
+        nutritions: action.payload,
       };
     // case "SET_LOADING":
     //   return {
     //     ...state,
     //     loading: !state.loading,
     //   };
-    case "DELETE_WEIGHT":
+    case "DELETE_NUTRITION":
       return {
         ...state,
-        weights: state.weights.filter(
+        nutritions: state.nutritions.filter(
           (item) => item._id !== action.payload._id
         ),
       };
-    case "SET_ERROR_WEIGHT":
+    case "SET_ERROR_NUTRITION":
       return {
         ...state,
         error: action.payload,
         loading: false,
       };
-    case "FORM_UPDATE_WEIGHT":
+    case "FORM_UPDATE_NUTRITION":
       return {
         ...state,
         [action.payload.prop]: action.payload.value,
       };
-    case "NEW_WEIGHT":
-      console.log(action.payload.weight);
+    case "NEW_NUTRITION":
+      console.log(action.payload.nutrition);
       return {
         ...state,
-        weights: [...state.weights, action.payload],
+        nutritions: [...state.nutritions, action.payload],
       };
-    case "UPDATE_WEIGHT":
+    case "UPDATE_NUTRITION":
       //finding index of the item
-      const index = state.weights.findIndex(
+      const index = state.nutritions.findIndex(
         (item) => item.id !== action.payload.res._id
       );
       //making a new array
-      const newArray = [...state.weights];
+      const newArray = [...state.nutritions];
       //changing value in the new array
       newArray[index] = action.payload.res;
 
@@ -56,18 +58,19 @@ export default (state = initialState, action) => {
         //copying the orignal state
         ...state,
         //reassingning todos to new array
-        weights: newArray,
+        nutritions: newArray,
       };
-    case "PASS_WEIGHT_AND_ID_TO_STATE":
+    case "PASS_NUTRITION_VARIABLES_TO_STATE":
       console.log(action.payload);
       return {
         ...state,
-        weight: action.payload.weight,
+        protein: action.payload.protein,
+        carbohydrate: action.payload.carbohydrate,
+        fats: action.payload.fats,
         updateId: action.payload.id,
       };
 
     default:
       return state;
   }
-  
 };

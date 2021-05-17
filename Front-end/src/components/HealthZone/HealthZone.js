@@ -61,6 +61,9 @@ class HealthZone extends Component {
                   rounded
                   title="Calorie Tracking"
                   style={styles.btnStyle}
+                  onPress={() =>
+                    this.props.navigation.navigate(routes.NUTRITION_HOME)
+                  }
                 >
                   <Text>Calorie Zone</Text>
                 </Button>
