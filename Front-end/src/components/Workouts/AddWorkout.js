@@ -58,8 +58,8 @@ class AddWorkout extends Component {
   }
   addSet(id) {
     let setObject = {
-      rep: "22",
-      weight: "22",
+      rep: "",
+      weight: "",
     };
 
     this.addWorkoutExerciseSet(setObject, id);
@@ -82,19 +82,7 @@ class AddWorkout extends Component {
 
     this.addWorkoutExercise(exerciseObject);
   }
-  // handleChangeOnReps = (e) => {
-  //   let currentRepField = e.target.value;
 
-  //   const updateRepState = props.workoutExercise.filter(
-  //     (item, index) => item.exercise === currentRepField.exercise
-  //   );
-  //   console.log("yeehaw")
-  //   props.formUpdateWorkout({
-  //     prop: props.workoutExercise[index],
-  //     value,
-  //   })
-
-  // };
   render() {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -142,7 +130,8 @@ class AddWorkout extends Component {
                 workoutExercise={item}
                 addSet={this.addSet}
                 workoutExercises={this.props.workoutExercises}
-                onChangeText={this.handleChangeOnReps}
+                formUpdateWorkoutRep={this.formUpdateWorkoutRep}
+                formUpdateWorkoutWeight={this.formUpdateWorkoutWeight}
               />
             )}
             keyExtractor={(workoutExercise, index) => index.toString()}

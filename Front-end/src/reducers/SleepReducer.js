@@ -10,11 +10,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "INITIAL_FETCH_SLEEPS":
-              state.sleeps = action.payload.sleeps;
-              const usersSleepsArray = state.sleeps.filter(
-                (item) => item.user === action.payload.user
-              );
-              console.log(usersSleepsArray);
+      state.sleeps = action.payload.sleeps;
+      const usersSleepsArray = state.sleeps.filter(
+        (item) => item.user === action.payload.user
+      );
+      console.log(usersSleepsArray);
 
       return {
         ...state,
@@ -49,17 +49,22 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_SLEEPS":
- const index = state.sleeps.findIndex(item => item.id !== action.payload.res._id); //finding index of the item
- console.log(index)
- const newArray = [...state.sleeps]; //making a new array
- newArray[index] = action.payload.res;//changing value in the new array
- console.log("res", action.payload.res);
- console.log("ARRAY",newArray)
- return { 
-  ...state, //copying the orignal state
-  sleeps: newArray, //reassingning todos to new array
- }
+      //finding index of the item
+      const index = state.sleeps.findIndex(
+        (item) => item._id === action.payload.res._id
+      );
+      console.log("INDEX",index);
+      //making a new array
+      const newArray = [...state.sleeps];
+      //changing value in the new array
+      newArray[index] = action.payload.res;
 
+      return {
+        //copying the orignal state
+        ...state,
+        //reassingning todos to new array
+        sleeps: newArray,
+      };
 
     case "PASS_HOURS_MINUTES_AND_ID_TO_STATE":
       console.log(action.payload);

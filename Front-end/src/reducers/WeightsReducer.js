@@ -10,14 +10,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "INITIAL_FETCH_WEIGHTS":
-        
-        state.weights = action.payload.weights
-        const usersWeightsArray = state.weights.filter((item) => item.user === action.payload.user);
-        console.log(usersWeightsArray);
+      state.weights = action.payload.weights;
+      const usersWeightsArray = state.weights.filter(
+        (item) => item.user === action.payload.user
+      );
+      console.log(usersWeightsArray);
 
       return {
         ...state,
-        weights: usersWeightsArray
+        weights: usersWeightsArray,
       };
     // case "SET_LOADING":
     //   return {
@@ -51,8 +52,9 @@ export default (state = initialState, action) => {
     case "UPDATE_WEIGHT":
       //finding index of the item
       const index = state.weights.findIndex(
-        (item) => item.id !== action.payload.res._id
+        (item) => item._id === action.payload.res._id
       );
+      console.log("INDEX", index);
       //making a new array
       const newArray = [...state.weights];
       //changing value in the new array
@@ -62,7 +64,7 @@ export default (state = initialState, action) => {
         //copying the orignal state
         ...state,
         //reassingning todos to new array
-        weights: newArray,
+        sleeps: newArray,
       };
     case "PASS_WEIGHT_AND_ID_TO_STATE":
       console.log(action.payload);

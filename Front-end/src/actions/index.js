@@ -204,11 +204,28 @@ export const addWorkoutExerciseSet = (setObject,exerciseId) => {
     });
   };
 };
-
 export const formUpdateWorkout = ({ prop, value }) => {
-  console.log(prop);
   return {
     type: "FORM_UPDATE_WORKOUT",
+    payload: { prop, value },
+  };
+};
+export const formUpdateWorkoutRep = ({ prop, value }) => {
+  
+  console.log(value, "VAL:UEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", prop);
+  return {
+    type: "FORM_UPDATE_WORKOUT_REP",
+    payload: { prop, value },
+  };
+};
+export const formUpdateWorkoutWeight = ({ prop, value }) => {
+  console.log(
+    value,
+    "VAL:UEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+    prop
+  );
+  return {
+    type: "FORM_UPDATE_WORKOUT_WEIGHT",
     payload: { prop, value },
   };
 };
@@ -321,23 +338,25 @@ export const createNewWeight = ({ weight, token }) => {
 };
 
 
-export const updateWeight = ({ weightNew, token, id }) => {
+export const updateWeight = ({ newWeight, token, id }) => {
   const weight = {
-    weight:weightNew,
+    weight: newWeight,
     id: id,
   };
+  
   return (dispatch) => {
     fetch(`http://192.168.1.19:3000/api/weight/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json",
         "auth-token": token,
       },
       body: JSON.stringify(weight),
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         dispatch({
           type: "UPDATE_WEIGHT",
           payload: {
@@ -348,7 +367,7 @@ export const updateWeight = ({ weightNew, token, id }) => {
       .catch((error) => {
         console.log(error);
         dispatch({
-          type: "SET_ERROR_SLEEPS",
+          type: "SET_ERROR_WEIGHT",
           payload: error,
         });
       });

@@ -57,22 +57,49 @@ export default (state = initialState, action) => {
           ...state,
           workoutExercises: [...workoutExercises],
         };
-
       case "FORM_UPDATE_WORKOUT":
         return {
           ...state,
           [action.payload.prop]: action.payload.value,
         };
-      case "FORM_UPDATE_REP":
-        workoutExercises = state.workoutExercises
-              // const index = workoutExercises.findIndex(
-              //   (item) => item.exercise === action.payload.exercise
-              // );
+      case "FORM_UPDATE_WORKOUT_REP":
+        const exerciseIndexRep = action.payload.prop[0];
+        const setsIndexRep = action.payload.prop[1];
+
+        const workoutExercisesTwo = state.workoutExercises;
+        workoutExercisesTwo[exerciseIndexRep].sets[setsIndexRep].rep =
+          action.payload.value;
+
+        workoutExercisesTwo[exerciseIndexRep].sets = [
+          ...workoutExercisesTwo[exerciseIndexRep].sets,
+        ];
+
         return {
           ...state,
-          [action.payload.prop]: action.payload.value,
+          workoutExercises: [...workoutExercisesTwo],
         };
+
+      case "FORM_UPDATE_WORKOUT_WEIGHT":
+        console.log(action.payload);
+        const exerciseIndexWeight = action.payload.prop[0];
+        const setsIndexWeight = action.payload.prop[1];
+
+        const workoutExercisesThree = state.workoutExercises;
+        workoutExercisesThree[exerciseIndexWeight].sets[
+          setsIndexWeight
+        ].weight = action.payload.value;
+
+        workoutExercisesThree[exerciseIndexWeight].sets = [
+          ...workoutExercisesThree[exerciseIndexWeight].sets,
+        ];
+
+        return {
+          ...state,
+          workoutExercises: [...workoutExercisesThree],
+        };
+
       case "NEW_WORKOUT":
+        console.log(action.payload);
         return {
           ...state,
           workouts: [...state.workouts, action.payload],

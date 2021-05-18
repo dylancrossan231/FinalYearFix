@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, Image, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { ColoredRaisedButton, getTheme } from "react-native-material-kit";
@@ -45,37 +45,28 @@ const styles = StyleSheet.create({
   },
 });
 const ExerciseWorkoutItem = (props) => {
-  function handleChangeOnReps(e){
-    console.log(e);
-
-    log.logToFile("Testing123").then((res) => {
-      console.log(res);
+  const generateHandleChangeOnReps=(index)=>(val)=>{ 
+          const exerciseArrayIndex = props.workoutExercises.findIndex(
+            (item) => item.exercise === props.workoutExercise.exercise
+          );
+    props.formUpdateWorkoutRep({
+      prop: [exerciseArrayIndex,index],
+      value: val,
     });
 
-    // props.workoutExercises.map((item, index) => {
-    // const index = props.workoutExercises.findIndex(
-    //   (item) => item.exercise === e.exercise,
-    // );
+  }
+    const generateHandleChangeOnWeights = (index) => (val) => {
+      const exerciseArrayIndex = props.workoutExercises.findIndex(
+        (item) => item.exercise === props.workoutExercise.exercise
+      );
 
-    // console.log(e,index,setIndex);
-    //     // let currentRepField = e.target.value;
+      props.formUpdateWorkoutWeight({
+        prop: [exerciseArrayIndex, index],
+        value: val,
+      });
+    };
 
-    //     // const updateRepState = props.workoutExercise.filter(
-    //     //   (item, index) => item.exercise === currentRepField.exercise
-    //     // );
-    //     // console.log("yeehaw")
-    //     // props.formUpdateWorkout({
-    //     //   prop: props.workoutExercise[index],
-    //     //   value,
-    //     // })
-    // });
 
-    // (value) =>
-    //   props.formUpdateRep({
-    //     prop: workoutExercise,
-    //     value,
-    //   });
-  };
   return (
     <View style={[theme.cardStyle, styles.card]}>
       <Button
@@ -88,9 +79,7 @@ const ExerciseWorkoutItem = (props) => {
         <Text>Add Set</Text>
       </Button>
 
-      {props.workoutExercise.sets.map((item, index) => {
-
-        const [rep, setRep] = useState('');
+      {props.workoutExercise.sets.map((setItem, index) => {
         return (
           <Content>
             <Form style={{ flexDirection: "row" }} key={index}>
@@ -104,7 +93,7 @@ const ExerciseWorkoutItem = (props) => {
                   rounded
                   style={styles.textFieldStyle}
                   placeholder={"rep field"}
-                  value={rep}
+                  value=""
                 >
                   {/* {console.log(props.workoutExercises[index])} */}
 
@@ -117,7 +106,7 @@ const ExerciseWorkoutItem = (props) => {
                     data-id={index}
                     id={index}
                     className="rep"
-                    onChange={handleChangeOnReps}
+                    onChangeText={generateHandleChangeOnReps(index)}
                   />
                 </Item>
               </Content>
@@ -126,7 +115,7 @@ const ExerciseWorkoutItem = (props) => {
                   rounded
                   style={styles.textFieldStyle}
                   placeholder={"weight field"}
-                  // value={props.workoutExercise.sets[index].rep}
+                  value=""
                 >
                   <Label htmlFor={index}>
                     <Text>Weight</Text>
@@ -137,7 +126,7 @@ const ExerciseWorkoutItem = (props) => {
                     data-id={index}
                     id={index}
                     className="weight"
-                    // onChangeText={props.handleChangeOnReps(index)}
+                    onChangeText={generateHandleChangeOnWeights(index)}
                   />
                 </Item>
               </Content>

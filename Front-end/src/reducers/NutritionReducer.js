@@ -52,8 +52,9 @@ export default (state = initialState, action) => {
     case "UPDATE_NUTRITION":
       //finding index of the item
       const index = state.nutritions.findIndex(
-        (item) => item.id !== action.payload.res._id
+        (item) => item._id === action.payload.res._id
       );
+      console.log(index)
       //making a new array
       const newArray = [...state.nutritions];
       //changing value in the new array
