@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/EvilIcons";
 import ExerciseItem from "./ExerciseItem";
 import * as actions from "../../actions";
 import { routes } from "../navigation_new/app-routes";
-import { Button } from "native-base";
+import { Button, Container } from "native-base";
 
 
 
@@ -43,15 +43,11 @@ if (previousScreen.state) {
 
 this.props.loadInitialExercises(this.props.token);
 }
-
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name={"pencil"} size={50} color={tintColor} />
-    ),
-  };
-
+ 
   render() {
-    const { token, loading, error, exercises } = this.props;
+    console.log(this.props, "THESE PROPS EXERCISE");
+  
+    const { token, loading, error, exercises, workoutExercises } = this.props;
     if (loading || (!error && exercises.length === 0))
       return (
         <View>
@@ -72,7 +68,7 @@ this.props.loadInitialExercises(this.props.token);
     if (this.state.prevScreen === "ADDWORKOUT")
     
       return (
-        <View style={styles.container}>
+        <Container>
           <FlatList
             data={exercises}
             renderItem={({ item }) => (
@@ -82,24 +78,26 @@ this.props.loadInitialExercises(this.props.token);
                 addWorkoutExercises={
                   this.props.route.params?.passMethod.addWorkoutExercises
                 }
+                passFormElementsBackToAddWorkout={this.passFormElementsBackToAddWorkout}
+                workoutExercises={workoutExercises}
+                workout_name={this.props.workout_name}
                 exercises={item}
               />
             )}
             keyExtractor={(exercise, index) => index.toString()}
           ></FlatList>
-          <Text>HELLO</Text>
-        </View>
+        </Container>
       );
       
-      return (
-        <View style={styles.container}>
-          <FlatList
-            data={exercises}
-            renderItem={({ item }) => <ExerciseItem exercises={item} />}
-            keyExtractor={(exercise, index) => index.toString()}
-          />
-        </View>
-      );
+        return (
+          <Container>
+            <FlatList
+              data={exercises}
+              renderItem={({ item }) => <ExerciseItem exercises={item} />}
+              keyExtractor={(exercise, index) => index.toString()}
+            />
+          </Container>
+        );
 
         
   }
@@ -108,6 +106,8 @@ this.props.loadInitialExercises(this.props.token);
 const mapStateToProps = (state) => {
   return {
     exercises: state.exercise.exercises,
+    workoutExercises: state.workout.workoutExercises,
+    workout_name: state.workout.workout_name,
     loading: state.exercise.loading,
     error: state.exercise.error,
     token: state.people.token,

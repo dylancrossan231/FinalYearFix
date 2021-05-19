@@ -10,7 +10,12 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import * as actions from '../../actions';
 import {
   Text,
-  Button
+  Button,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Container
 } from "native-base";
 import { render } from 'react-dom';
 
@@ -47,35 +52,59 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
 const ExerciseItem = (props) => {
   return (
-    <View style={[theme.cardStyle, styles.card]}>
-      <Image
-        source={require("../../images/background.jpg")}
-        style={[theme.cardImageStyle, styles.image]}
-      />
-      <Icon name={"user"} size={100} style={styles.icon} />
-      <Text style={[theme.cardActionStyle, styles.action]}>
-        {props.exercises.exercise_name}
-      </Text>
+    <View>
       {props.prevScreen === "ADDWORKOUT" ? (
-        <Button
-          block
-          rounded
-          title="Add Exercise"
-          style={styles.btnStyle}
-          onPress={() =>
-            props.navigation.navigate(
-              "Main",
-              { screen: "ADDWORKOUT" },
-              props.addWorkoutExercises(props.exercises.exercise_name,props.exercises._id)
-            )
-          }
-        >
-          <Text style={styles.btnText}> Add Exercise</Text>
-        </Button>
+        <Card>
+          <CardItem header>
+            <Text>Name:{props.exercises.exercise_name}</Text>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>Instructions: {props.exercises.instructions}</Text>
+              <Text>Instructions: {props.exercises.exercise_type}</Text>
+            </Body>
+          </CardItem>
+          <CardItem footer></CardItem>
+          <Button
+            block
+            rounded
+            title="Add Exercise"
+            style={styles.btnStyle}
+            onPress={() =>
+              props.navigation.navigate(
+                "Main",
+                { screen: "ADDWORKOUT" },
+                props.addWorkoutExercises(
+                  props.exercises.exercise_name,
+                  props.exercises._id
+                ),
+                props.passFormElementsBackToAddWorkout(
+                  props.workoutExercises,
+                  props.workout_name
+                )
+
+              )
+            }
+          >
+            <Text style={styles.btnText}> Add Exercise</Text>
+          </Button>
+        </Card>
       ) : (
-        <Text></Text>
+        <Card>
+          <CardItem header>
+            <Text>Name:{props.exercises.exercise_name}</Text>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>Instructions: {props.exercises.instructions}</Text>
+              <Text>Instructions: {props.exercises.exercise_type}</Text>
+            </Body>
+          </CardItem>
+          <CardItem footer></CardItem>
+        </Card>
       )}
     </View>
   );

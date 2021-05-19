@@ -71,14 +71,14 @@ const NutritionItem = (props) => {
           </Body>
         </CardItem>
         <CardItem footer>
-          <Button
+          <Button transparent
             onPress={() =>
               props.deleteNutrition(props.token, props.nutrition._id)
             }
           >
-            <Icon name="delete" size={40} />
+            <Icon style={{ color: "#5DB075" }} name="delete" size={40} />
           </Button>
-          <Button
+          <Button transparent
             style={styles.buttonSpacing}
             onPress={() =>
               props.onPressNavigateUpdate(
@@ -97,7 +97,7 @@ const NutritionItem = (props) => {
             //   })
             // }
           >
-            <Icon name="edit" size={40} />
+            <Icon  style={{ color: "#5DB075" }}style={{ color: "#5DB075" }} name="edit" size={40} />
           </Button>
         </CardItem>
       </Card>

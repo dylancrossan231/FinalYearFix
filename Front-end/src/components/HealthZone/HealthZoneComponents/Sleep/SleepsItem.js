@@ -69,12 +69,13 @@ const SleepsItem = (props) => {
           </Body>
         </CardItem>
         <CardItem footer>
-          <Button
+          <Button transparent
             onPress={() => props.deleteSleep(props.token, props.sleep._id)}
           >
-            <Icon name="delete" size={40} />
+            <Icon style={{ color: "#5DB075" }} name="delete" size={40} />
           </Button>
           <Button
+            transparent
             style={styles.buttonSpacing}
             onPress={() =>
               props.onPressNavigateUpdate(
@@ -92,7 +93,7 @@ const SleepsItem = (props) => {
             //   })
             // }
           >
-            <Icon name="edit" size={40} />
+            <Icon style={{ color: "#5DB075" }} name="edit" size={40} />
           </Button>
         </CardItem>
       </Card>

@@ -65,29 +65,25 @@ class SleepsHome extends Component {
     // });
     this.props.loadInitialSleeps(this.props.token,this.props.user);
   }
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name={"archive"} size={50} color={tintColor} />
-    ),
-  };
+
   render() {
     const { error, sleeps } = this.props;
     if (!error && sleeps.length === 0)
       return (
         <View>
-          <Button
+          <Button transparent
             styles={{ textAlign: "right" }}
             onPress={() => this.props.navigation.goBack()}
           >
-            <Icon name="arrowleft" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
 
           <Text>You have no Sleep recorded yet</Text>
-          <Button
+          <Button transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_SLEEP)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
         </View>
       );
@@ -105,14 +101,15 @@ class SleepsHome extends Component {
       <Container>
         <View style={styles.container}>
           <Button
+            transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_SLEEP)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
 
-          <Button onPress={() => this.props.navigation.goBack()}>
-            <Icon name="arrowleft" size={50} />
+          <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
           <FlatList
             data={sleeps}

@@ -25,13 +25,20 @@ const Auth = (props) => {
     >
       {!props.token || props.token == "" ? (
         <>
-          <Stack.Screen name={routes.SIGN_IN} component={loginScreen} />
-          <Stack.Screen name={routes.SIGN_UP} component={AddPerson} />
+          <Stack.Screen
+            name={routes.SIGN_IN}
+            unmountOnBlur={true}
+            component={loginScreen}
+          />
+          <Stack.Screen
+            name={routes.SIGN_UP}
+            unmountOnBlur={true}
+            component={AddPerson}
+          />
         </>
       ) : (
         <>
           <Stack.Screen name={routes.MAINTAB} component={AuthTabNavigator} />
-
         </>
       )}
     </Stack.Navigator>

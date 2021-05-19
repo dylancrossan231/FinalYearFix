@@ -70,29 +70,25 @@ class NutritionHome extends Component {
     // });
     this.props.loadInitialNutritions(this.props.token,this.props.user);
   }
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name={"archive"} size={50} color={tintColor} />
-    ),
-  };
+
   render() {
     const { error, nutritions } = this.props;
     if (!error && nutritions.length === 0)
       return (
         <View>
-          <Button
+          <Button transparent
             styles={{ textAlign: "right" }}
             onPress={() => this.props.navigation.goBack()}
           >
-            <Icon name="arrowleft" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
 
           <Text>You have no nutrition recorded yet</Text>
-          <Button
+          <Button transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_NUTRITION)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
         </View>
       );
@@ -109,15 +105,15 @@ class NutritionHome extends Component {
     return (
       <Container>
         <View style={styles.container}>
-          <Button
+          <Button transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_NUTRITION)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
 
-          <Button onPress={() => this.props.navigation.goBack()}>
-            <Icon name="arrowleft" size={50} />
+          <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
           <FlatList
             data={nutritions}

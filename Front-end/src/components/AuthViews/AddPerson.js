@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import * as actions from '../../actions';
 import {Container, Header, Content, Item, Input, Button} from 'native-base';
-
+import {routes} from "../navigation_new/app-routes"
 
 const styles = StyleSheet.create({
   form: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 });
 
 
-let Image_Http_URL ={ uri: 'https://avatars.githubusercontent.com/u/1250478?s=400&u=a3d8c44bcef6911a6905c60c10daaa463cb8a520&v=4'};
+// let Image_Http_URL ={ uri: 'https://avatars.githubusercontent.com/u/1250478?s=400&u=a3d8c44bcef6911a6905c60c10daaa463cb8a520&v=4'};
 
 
 class AddPerson extends Component {
@@ -55,60 +55,63 @@ class AddPerson extends Component {
         const {email, password} = this.props;
 
         this.props.createNewContact({email, password});
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate(routes.SIGN_IN);
     }
 
     render() {
+      const { email, password } = this.props;
         return (
-        <Container>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.form}>
-              <Text style= {styles.titleStyle}>Register</Text>
+          <Container>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.form}>
+                <Text style={styles.titleStyle}>Register</Text>
 
-              <Content>
-                <Image source={Image_Http_URL} style={{height: 150, width: 150, resizeMode: 'stretch'}} />
-                <Item
-                  rounded
-                  style={styles.textFieldStyle}
-                  placeholder={'Email...'}
-                  value={this.props.email}>
-                  <Input
-                    onChangeText={(value) =>
-                      this.props.formUpdate({prop: 'email', value})
-                    }
-                    placeholder="Email Address"
-                  />
-                </Item>
-              </Content>
-              <Content>
-                <Item
-                  rounded
-                  style={styles.textFieldStyle}
-                  placeholder={'Password'}
-                  value={this.props.password}>
-                  <Input
-                    onChangeText={(value) =>
-                      this.props.formUpdate({prop: 'password', value})
-                    }
-                    placeholder="Password"
-                  />
-                </Item>
-              </Content>
+                <Content>
+                  {/* <Image source={Image_Http_URL} style={{height: 150, width: 150, resizeMode: 'stretch'}} /> */}
+                  <Item
+                    rounded
+                    style={styles.textFieldStyle}
+                    placeholder={"Email..."}
+                    value={email}
+                  >
+                    <Input
+                      onChangeText={(value) =>
+                        this.props.formUpdate2({ prop: "email", value })
+                      }
+                      placeholder="Email Address"
+                    />
+                  </Item>
+                </Content>
+                <Content>
+                  <Item
+                    rounded
+                    style={styles.textFieldStyle}
+                    placeholder={"Password"}
+                    value={password}
+                  >
+                    <Input
+                      onChangeText={(value) =>
+                        this.props.formUpdate2({ prop: "password", value })
+                      }
+                      placeholder="Password"
+                    />
+                  </Item>
+                </Content>
 
-              <View style={styles.addButton}>
-                <Button
-                  block
-                  rounded
-                  title="Register"
-                  style={styles.btnStyle}
-                  onPress={this.onAddPress.bind(this)}>
-                  <Text style={styles.btnText}>Register</Text>
-                </Button>
+                <View style={styles.addButton}>
+                  <Button
+                    block
+                    rounded
+                    title="Register"
+                    style={styles.btnStyle}
+                    onPress={this.onAddPress.bind(this)}
+                  >
+                    <Text style={styles.btnText}>Register</Text>
+                  </Button>
+                </View>
               </View>
-            </View>
-          </ScrollView>
-        </Container>
-
+            </ScrollView>
+          </Container>
         );
     }
 }

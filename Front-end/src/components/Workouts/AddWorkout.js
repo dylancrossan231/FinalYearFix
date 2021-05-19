@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions';
 import { Container, Header, Content, Item, Button, Input ,Label,Form} from "native-base";
 import ExerciseWorkoutItem from '../Exercises/ExerciseWorkoutItem';
+import {routes} from "../navigation_new/app-routes";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const styles = StyleSheet.create({
   useNativeDriver: true,
@@ -41,20 +43,26 @@ const styles = StyleSheet.create({
 });
 
 class AddWorkout extends Component {
+
   onAddPress() {
     const { workout_name, workoutExercises } = this.props;
-
+ 
     this.props.createNewWorkout({
       workoutExercises,
       workout_name,
       token: this.props.token,
     });
-    this.props.navigation.navigate("HOMEWORKOUT");
+    this.props.navigation.navigate(routes.HOME_WORKOUT);
   }
   componentDidMount() {
+    console.log("HOWDY PARTNER")
+    // this.setState({
+    //   // this.props.workout_name 
+    // })
     this.props.navigation.dangerouslyGetParent().setOptions({
       tabBarVisible: false,
     });
+
   }
   addSet(id) {
     let setObject = {
@@ -82,11 +90,41 @@ class AddWorkout extends Component {
 
     this.addWorkoutExercise(exerciseObject);
   }
-
+  navigateBackAndClearWorkoutExercises(){
+  this.props.clearWorkoutExercisesArray();
+  this.props.navigation.navigate(routes.HOME_WORKOUT);
+  }
   render() {
+        const { workout_name,workoutExercises } = this.props;
+
     return (
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView>
+        <Header />
         <View style={styles.form}>
+          <Button
+            transparent
+            style={{ position: "absolute", left: 0, paddingTop: 10 }}
+            onPress={() => this.navigateBackAndClearWorkoutExercises()}
+          >
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={60} />
+          </Button>
+          <Button
+            transparent
+            style={{ position: "absolute", right: 0 }}
+            onPress={() =>
+              this.props.navigation.navigate(routes.EXERCISEHOME, {
+                passMethod: {
+                  addWorkoutExercises: this.addWorkoutExercises,
+                },
+              })
+            }
+          >
+            <Icon
+              style={{ color: "#5DB075", paddingTop: 10 }}
+              name="plussquareo"
+              size={50}
+            />
+          </Button>
           <Text>Add a new Workout</Text>
 
           <Content>
@@ -94,9 +132,9 @@ class AddWorkout extends Component {
               rounded
               style={styles.textFieldStyle}
               placeholder={"workout_name"}
-              value={this.props.workout_name}
             >
               <Input
+                value={workout_name}
                 onChangeText={(value) =>
                   this.props.formUpdateWorkout({ prop: "workout_name", value })
                 }
@@ -105,26 +143,8 @@ class AddWorkout extends Component {
             </Item>
           </Content>
 
-          <View style={styles.addButton}>
-            <Button
-              block
-              rounded
-              title="Add Exercise"
-              style={styles.btnStyle}
-              addWorkoutExercises={this.addWorkoutExercises}
-              onPress={() =>
-                this.props.navigation.navigate("EXERCISEHOME", {
-                  passMethod: {
-                    addWorkoutExercises: this.addWorkoutExercises,
-                  },
-                })
-              }
-            >
-              <Text style={styles.btnText}>Add Exercise</Text>
-            </Button>
-          </View>
           <FlatList
-            data={this.props.workoutExercises}
+            data={workoutExercises}
             renderItem={({ item }) => (
               <ExerciseWorkoutItem
                 workoutExercise={item}

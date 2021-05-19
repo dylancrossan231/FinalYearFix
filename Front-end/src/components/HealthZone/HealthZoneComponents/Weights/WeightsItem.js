@@ -68,18 +68,23 @@ const WeightsItem = (props) => {
           </Body>
         </CardItem>
         <CardItem footer>
-          <Button
+          <Button transparent
             onPress={() => props.deleteWeight(props.token, props.weight._id)}
           >
-            <Icon name="delete" size={40} />
+            <Icon style={{ color: "#5DB075" }} name="delete" size={40} />
           </Button>
           <Button
+            transparent
             style={styles.buttonSpacing}
             onPress={() =>
-              props.onPressNavigateUpdate(props.weight.weight, props.weight._id, props)
+              props.onPressNavigateUpdate(
+                props.weight.weight,
+                props.weight._id,
+                props
+              )
             }
           >
-            <Icon name="edit" size={40} />
+            <Icon style={{ color: "#5DB075" }} name="edit" size={40} />
           </Button>
         </CardItem>
       </Card>

@@ -48,7 +48,6 @@ class HealthZone extends Component {
   render() {
     return (
       <Container>
-        <Header />
         <Content>
           <Card>
             <CardItem header>

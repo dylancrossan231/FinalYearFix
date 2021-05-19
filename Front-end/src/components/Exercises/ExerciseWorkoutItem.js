@@ -45,10 +45,13 @@ const styles = StyleSheet.create({
   },
 });
 const ExerciseWorkoutItem = (props) => {
+  console.log(props)
+  const exerciseArrayIndex = props.workoutExercises.findIndex(
+    (item) => item.exercise === props.workoutExercise.exercise
+  );
+
   const generateHandleChangeOnReps=(index)=>(val)=>{ 
-          const exerciseArrayIndex = props.workoutExercises.findIndex(
-            (item) => item.exercise === props.workoutExercise.exercise
-          );
+    
     props.formUpdateWorkoutRep({
       prop: [exerciseArrayIndex,index],
       value: val,
@@ -56,56 +59,60 @@ const ExerciseWorkoutItem = (props) => {
 
   }
     const generateHandleChangeOnWeights = (index) => (val) => {
-      const exerciseArrayIndex = props.workoutExercises.findIndex(
-        (item) => item.exercise === props.workoutExercise.exercise
-      );
+      
 
       props.formUpdateWorkoutWeight({
         prop: [exerciseArrayIndex, index],
         value: val,
       });
     };
+const mapThroughArray = (index) => (val) => {
 
+        props.formUpdateWorkoutWeight({
+          prop: [exerciseArrayIndex, index],
+          value: val,
+        });
+};
 
   return (
-    <View style={[theme.cardStyle, styles.card]}>
-      <Button
-        block
-        rounded
-        title="Add Set"
-        style={styles.btnStyle}
-        onPress={() => props.addSet(props.workoutExercise.exercise)}
-      >
-        <Text>Add Set</Text>
-      </Button>
-
+    <View style={[theme.cardStyle, styles.card]} >
       {props.workoutExercise.sets.map((setItem, index) => {
         return (
           <Content>
+            <Text style={{ paddingBottom: 0 }}>
+              {" "}
+              {props.workoutExercise.exercise_name}
+            </Text>
             <Form style={{ flexDirection: "row" }} key={index}>
-              <Text>{props.workoutExercise.exercise_name}</Text>
-              <Label htmlFor={index}>
-                <Text>Set {index + 1}</Text>
-              </Label>
-
-              <Content rounded>
+              <Content>
+                <Item rounded style={styles.textFieldStyle}>
+                  <Input disabled style={{ textAlign: "center" }}>
+                    Set: {index + 1}
+                  </Input>
+                </Item>
+              </Content>
+              <Content>
                 <Item
                   rounded
                   style={styles.textFieldStyle}
                   placeholder={"rep field"}
                   value=""
                 >
-                  {/* {console.log(props.workoutExercises[index])} */}
-
                   <Label htmlFor={index}>
                     <Text>Reps</Text>
                   </Label>
+                  {console.log(
+                    props.workoutExercises[exerciseArrayIndex].sets[index].rep
+                  )}
                   <Input
                     type="text"
                     name={index}
                     data-id={index}
                     id={index}
                     className="rep"
+                    value={
+                      props.workoutExercises[exerciseArrayIndex].sets[index].rep
+                    }
                     onChangeText={generateHandleChangeOnReps(index)}
                   />
                 </Item>
@@ -126,6 +133,9 @@ const ExerciseWorkoutItem = (props) => {
                     data-id={index}
                     id={index}
                     className="weight"
+                    value={
+                      props.workoutExercises[exerciseArrayIndex].sets[index].weight
+                    }
                     onChangeText={generateHandleChangeOnWeights(index)}
                   />
                 </Item>
@@ -134,6 +144,15 @@ const ExerciseWorkoutItem = (props) => {
           </Content>
         );
       })}
+      <Button
+        block
+        rounded
+        title="Add Set"
+        style={styles.btnStyle}
+        onPress={() => props.addSet(props.workoutExercise.exercise)}
+      >
+        <Text>Add Set</Text>
+      </Button>
     </View>
   );
 };

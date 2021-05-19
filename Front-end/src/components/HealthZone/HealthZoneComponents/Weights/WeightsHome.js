@@ -65,29 +65,27 @@ class WeightsHome extends Component {
     // });
     this.props.loadInitialWeights(this.props.token,this.props.user);
   }
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name={"archive"} size={50} color={tintColor} />
-    ),
-  };
+
   render() {
     const { error, weights } = this.props;
     if (!error && weights.length === 0)
       return (
         <View>
           <Button
+            transparent
             styles={{ textAlign: "right" }}
             onPress={() => this.props.navigation.goBack()}
           >
-            <Icon name="arrowleft" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
 
           <Text>You have no weights yet</Text>
           <Button
+            transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_WEIGHT)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
         </View>
       );
@@ -105,14 +103,15 @@ class WeightsHome extends Component {
       <Container>
         <View style={styles.container}>
           <Button
+            transparent
             style={{ position: "absolute", right: 0 }}
             onPress={() => this.props.navigation.navigate(routes.ADD_WEIGHT)}
           >
-            <Icon name="plussquareo" size={50} />
+            <Icon style={{ color: "#5DB075" }} name="plussquareo" size={50} />
           </Button>
 
-          <Button onPress={() => this.props.navigation.goBack()}>
-            <Icon name="arrowleft" size={50} />
+          <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon style={{ color: "#5DB075" }} name="arrowleft" size={50} />
           </Button>
           <FlatList
             data={weights}

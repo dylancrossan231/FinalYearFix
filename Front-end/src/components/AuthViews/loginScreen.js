@@ -4,7 +4,7 @@ import {Container, Header, Content, Item, Input ,Button} from 'native-base';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Icon from 'react-native-vector-icons/EvilIcons';
-
+import {routes} from "../navigation_new/app-routes"
 
 class loginScreen extends Component {
   static navigationOptions = {
@@ -23,6 +23,8 @@ class loginScreen extends Component {
   }
 
   render() {
+        const { email, password } = this.props;
+
     return (
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -34,7 +36,7 @@ class loginScreen extends Component {
                 rounded
                 style={styles.textFieldStyle}
                 placeholder={"Email..."}
-                value={this.props.email}
+                value={email}
               >
                 <Input
                   onChangeText={(value) =>
@@ -49,10 +51,9 @@ class loginScreen extends Component {
                 rounded
                 style={styles.textFieldStyle}
                 placeholder={"Password"}
-                value={this.props.password}
+                value={password}
               >
                 <Input
-                  
                   onChangeText={(value) =>
                     this.props.formUpdate({ prop: "password", value })
                   }
@@ -71,6 +72,19 @@ class loginScreen extends Component {
               >
                 <Text style={styles.btnText}>Login</Text>
               </Button>
+            </View>
+            <View style={styles.addButton}>
+              {/* <Button
+                block
+                rounded
+                title="Login"
+                style={styles.btnStyle}
+                onPress={this.props.navigation.navigate(routes.SIGN_UP)}
+              >
+                <Text style={styles.btnText}>
+                  Dont have an account? Sign Up here.
+                </Text>
+              </Button> */}
             </View>
           </View>
         </ScrollView>

@@ -12,10 +12,17 @@ export function AuthTabNavigator(props) {
 
   return (
     <Tab.Navigator
-      screenOptions={{ animationEnabled: true, unmountOnBlur: true }}
+      screenOptions={{
+        animationEnabled: true,
+        unmountOnBlur: true,
+      }}
       {...props}
     >
-      <Tab.Screen name={routes.MAIN} component={MainNavigator} />
+      <Tab.Screen
+        name={routes.MAIN}
+        component={MainNavigator}
+        unmountOnBlur={true}
+      />
       <Tab.Screen
         name={routes.EXERCISEHOME}
         component={ExercisesHome}

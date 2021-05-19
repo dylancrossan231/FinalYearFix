@@ -11,6 +11,7 @@ export const routes = {
   ADD_WORKOUT: "ADDWORKOUT",
   HOME_WORKOUT: "HOMEWORKOUT",
   COMPANY_HOME: "CompanyHome",
+  //AUTH ROUTES
   PEOPLE: "People",
 
   //StackNavigation for HealthZone

@@ -17,7 +17,11 @@ export function MainNavigator(props) {
       headerMode="none"
       screenOptions={{ animationEnabled: true }}
     >
-      <Stack.Screen name={routes.HOME_WORKOUT} component={WorkoutsHome} />
+      <Stack.Screen
+        unmountOnBlur={true}
+        name={routes.HOME_WORKOUT}
+        component={WorkoutsHome}
+      />
       <Stack.Screen
         name={routes.ADD_WORKOUT}
         component={AddWorkout}

@@ -24,6 +24,13 @@ export default (state = initialState, action) => {
           loading: false,
         };
 
+      case "CLEAR_WORKOUT_EXERCISES_ARRAY":
+        return {
+          ...state,
+          workoutExercises: [],
+          
+        };
+
       case "INITIAL_FETCH_WORKOUTS":
         state.workouts = action.payload.workouts;
         const usersWorkoutsArray = state.workouts.filter(
@@ -61,6 +68,13 @@ export default (state = initialState, action) => {
         return {
           ...state,
           [action.payload.prop]: action.payload.value,
+        };
+
+        case"PASS_FORM_ELEMENTS_BACK":
+         return {
+          ...state,
+          workout_name: action.payload.workout_name,
+          workoutExercises: action.payload.workoutExercises
         };
       case "FORM_UPDATE_WORKOUT_REP":
         const exerciseIndexRep = action.payload.prop[0];
@@ -103,9 +117,18 @@ export default (state = initialState, action) => {
         return {
           ...state,
           workouts: [...state.workouts, action.payload],
+          workoutExercises: []
+        };
+      case "DELETE_WORKOUT":
+        return {
+          ...state,
+          workouts: state.workouts.filter(
+            (item) => item._id !== action.payload._id
+          ),
         };
       default:
         return state;
     }
+    
 
     }

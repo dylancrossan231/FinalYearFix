@@ -59,7 +59,6 @@ class UpdateSleeps extends Component {
   render() {
     const{hours,minutes} = this.props;
     return (
-      <ScrollView showsVerticalScrollIndicator={false}>
         <Container>
           <View style={styles.form}>
             <Text>Update Sleep</Text>
@@ -101,7 +100,6 @@ class UpdateSleeps extends Component {
             </Content>
           </View>
         </Container>
-      </ScrollView>
     );
   }
 }

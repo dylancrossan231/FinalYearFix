@@ -1,22 +1,30 @@
 import React from 'react';
 import {
-  Text,
-  View,
+ 
   StyleSheet,
-  Image,
-  TouchableWithoutFeedback,
+
 } from 'react-native';
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Text,
+  Body,
+  Button,
+  Right,
+} from "native-base";
 import {connect} from 'react-redux';
 import {getTheme} from 'react-native-material-kit';
-import Icon from 'react-native-vector-icons/EvilIcons';
 import * as actions from '../../actions';
+import Icon from "react-native-vector-icons/AntDesign";
 
 const theme = getTheme();
 
 const styles = StyleSheet.create({
   card: {
     marginTop: 20,
-    
   },
   title: {
     top: 20,
@@ -27,31 +35,45 @@ const styles = StyleSheet.create({
     height: 100,
   },
   action: {
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: "black",
+    color: "white",
   },
   icon: {
-    position: 'absolute',
+    position: "absolute",
     top: 15,
     left: 0,
-    color: 'white',
-    backgroundColor: 'rgba(255,255,255,0)',
+    backgroundColor: "#5DB075",
   },
+
 });
 
 const WorkoutItem = (props) => {
-  
   return (
-    <View style={[theme.cardStyle, styles.card]}>
-      <Image
-        source={require('../../images/background.jpg')}
-        style={[theme.cardImageStyle, styles.image]}
-      />
-      <Icon name={'user'} size={100} style={styles.icon} />
-      <Text style={[theme.cardActionStyle, styles.action]}>
-        {props.workouts.workout_name}
-      </Text>
-    </View>
+    <Content>
+      <Card>
+        <CardItem header>
+          <Text>Date Created: {props?.workout?.created_date}</Text>
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text>{props?.workout?.workout_name}</Text>
+          </Body>
+        </CardItem>
+        <CardItem footer>
+          <Button
+            transparent
+            style={{ color: "#5DB075" }}
+            onPress={() => props.deleteWorkout(props.token, props.workout._id)}
+          >
+            <Icon
+              style={{ color: "#5DB075" }}
+              name="delete"
+              size={40}
+            />
+          </Button>
+        </CardItem>
+      </Card>
+    </Content>
   );
 };
 

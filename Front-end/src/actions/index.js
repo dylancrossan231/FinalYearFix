@@ -20,11 +20,15 @@ export const formUpdate = ({prop, value}) => {
     payload: {prop, value},
   };
 };
+export const formUpdate2 = ({ prop, value }) => {
+  return {
+    type: "FORM_UPDATE_2",
+    payload: { prop, value },
+  };
+};
 
-export const createNewContact = ({email, password, first_name, last_name, username, weight, height, D_O_B, gender}) => {
+export const createNewContact = ({email, password}) => {
   return (dispatch) => {
-
-
     fetch("http://192.168.1.19:300/api/user/register", {
       method: "POST",
 
@@ -34,14 +38,7 @@ export const createNewContact = ({email, password, first_name, last_name, userna
       },
       body: JSON.stringify({
         email: email,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-        username: username,
-        weight: weight,
-        height: height,
-        D_O_B: D_O_B,
-        gender: gender,
+        password: password
       }),
     })
       .then((response) => console.log(response))
@@ -212,24 +209,56 @@ export const formUpdateWorkout = ({ prop, value }) => {
 };
 export const formUpdateWorkoutRep = ({ prop, value }) => {
   
-  console.log(value, "VAL:UEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", prop);
   return {
     type: "FORM_UPDATE_WORKOUT_REP",
     payload: { prop, value },
   };
 };
 export const formUpdateWorkoutWeight = ({ prop, value }) => {
-  console.log(
-    value,
-    "VAL:UEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
-    prop
-  );
+
   return {
     type: "FORM_UPDATE_WORKOUT_WEIGHT",
     payload: { prop, value },
   };
 };
+export const clearWorkoutExercisesArray = (prop, value) => {
+  return {
+    type: "CLEAR_WORKOUT_EXERCISES_ARRAY",
+    payload: { prop, value },
+  };
+};
+export const passFormElementsBackToAddWorkout = ({ workoutExercises, workout_name }) => {
+ 
+  return {
+    type: "PASS_WORKOUT_VARAIBLES_TO_STATE",
+    payload: { workoutExercises, workout_name },
+  };
+};
 
+
+
+export const deleteWorkout = (token, id) => {
+  console.log(token,id)
+  return (dispatch) => {
+    fetch(`http://192.168.1.19:3000/api/workouts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "auth-token": token,
+      },
+    }).then((data) => {
+      dispatch({ type: "DELETE_WORKOUT", payload: { _id: id } }).catch(
+        (error) => {
+          return dispatch({
+            type: "SET_ERROR_WORKOUT",
+            payload: "Error: Could not connect to the server",
+          });
+        }
+      );
+    });
+  };
+};
 
 export const loadInitialWeights = (token,user) => {
   console.log(user)
@@ -338,12 +367,12 @@ export const createNewWeight = ({ weight, token }) => {
 };
 
 
-export const updateWeight = ({ newWeight, token, id }) => {
-  const weight = {
-    weight: newWeight,
-    id: id,
-  };
-  
+export const updateWeight = ({ weight, token, id }) => {
+  parseInt(weight)
+  const newWeight = {
+    weight:weight
+  }
+  console.log(newWeight)
   return (dispatch) => {
     fetch(`http://192.168.1.19:3000/api/weight/update/${id}`, {
       method: "PUT",
@@ -352,15 +381,15 @@ export const updateWeight = ({ newWeight, token, id }) => {
         "Accept": "application/json",
         "auth-token": token,
       },
-      body: JSON.stringify(weight),
+      body: JSON.stringify(newWeight),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
+        console.log(res);
         dispatch({
           type: "UPDATE_WEIGHT",
           payload: {
-            res
+            res,
           },
         });
       })
