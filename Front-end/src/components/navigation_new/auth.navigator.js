@@ -21,6 +21,7 @@ const Auth = (props) => {
     <Stack.Navigator
       headerMode="none"
       mode="modal"
+      initialRouteName={routes.SIGN_IN}
       screenOptions={{ animationEnabled: true }}
     >
       {!props.token || props.token == "" ? (

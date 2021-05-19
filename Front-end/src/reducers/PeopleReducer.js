@@ -5,13 +5,7 @@ const initialState = {
     email: '',
     password: '',
     token: '',
-    first_name: '',
-    last_name: '',
-    username: '',
-    weight: '',
-    height: '',
-    D_O_B: '',
-    gender: '',
+
     
 
 }

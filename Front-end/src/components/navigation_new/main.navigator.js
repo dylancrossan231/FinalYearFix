@@ -15,6 +15,7 @@ export function MainNavigator(props) {
       {...props}
       mode="modal"
       headerMode="none"
+      initialRouteName={routes.HOME_WORKOUT}
       screenOptions={{ animationEnabled: true }}
     >
       <Stack.Screen
@@ -22,10 +23,7 @@ export function MainNavigator(props) {
         name={routes.HOME_WORKOUT}
         component={WorkoutsHome}
       />
-      <Stack.Screen
-        name={routes.ADD_WORKOUT}
-        component={AddWorkout}
-      />
+      <Stack.Screen name={routes.ADD_WORKOUT} component={AddWorkout} />
     </Stack.Navigator>
   );
 }

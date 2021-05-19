@@ -20,16 +20,11 @@ export const formUpdate = ({prop, value}) => {
     payload: {prop, value},
   };
 };
-export const formUpdate2 = ({ prop, value }) => {
-  return {
-    type: "FORM_UPDATE_2",
-    payload: { prop, value },
-  };
-};
+
 
 export const createNewContact = ({email, password}) => {
   return (dispatch) => {
-    fetch("http://192.168.1.19:300/api/user/register", {
+    fetch("http://192.168.1.19:3000/api/user/register", {
       method: "POST",
 
       headers: {
@@ -335,32 +330,34 @@ export const deleteWeight = (token,id) => {
 // };
 
 export const createNewWeight = ({ weight, token }) => {
-  console.log(weight)
+  console.log(weight);
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/weights/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
         "auth-token": token,
       },
       body: JSON.stringify({
         weight: weight,
       }),
     })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        
-        dispatch({ type: "NEW_WEIGHT", payload: data });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res, "RES");
+        dispatch({
+          type: "NEW_WEIGHT",
+          payload: {
+            res,
+          },
+        });
       })
       .catch((error) => {
-        console.log("error load weights!", error);
-        return dispatch({
-          type: "SET_ERROR",
-          payload: "Error: Could not connect to the server",
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_SLEEPS",
+          payload: error,
         });
       });
   };
@@ -483,7 +480,6 @@ export const deleteSleep = (token, id) => {
 };
 
 export const createNewSleep = ({ hours, minutes, token }) => {
-
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/sleep/create", {
       method: "POST",
@@ -494,21 +490,24 @@ export const createNewSleep = ({ hours, minutes, token }) => {
       },
       body: JSON.stringify({
         hours: hours,
-         minutes: minutes
+        minutes: minutes,
       }),
     })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        dispatch({ type: "NEW_SLEEPS", payload: data });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res, "RES");
+        dispatch({
+          type: "NEW_SLEEPS",
+          payload: {
+            res,
+          },
+        });
       })
       .catch((error) => {
-        console.log("error load sleeps!", error);
-        return dispatch({
-          type: "SET_ERROR",
-          payload: "Error: Could not connect to the server",
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_SLEEPS",
+          payload: error,
         });
       });
   };
@@ -533,6 +532,7 @@ export const updateSleep = ({ hours,minutes, token, id }) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res,"RES")
         dispatch({
           type: "UPDATE_SLEEPS",
           payload: {
@@ -619,14 +619,14 @@ export const deleteNutrition = (token, id) => {
 };
 
 export const createNutrition = ({ protein, carbohydrate, fats, token }) => {
-  console.log(protein, carbohydrate)
-    const addNutrition = parseInt(protein) + parseInt(carbohydrate);
-    console.log(addNutrition ," nutrition add");
+  console.log(protein, carbohydrate);
+  const addNutrition = parseInt(protein) + parseInt(carbohydrate);
+  console.log(addNutrition, " nutrition add");
 
-    const nutritionVariable = addNutrition * 4;
-    const nutritionVariable2 = parseInt(fats) * 9; 
-    console.log(nutritionVariable, nutritionVariable2)
-    const calories = nutritionVariable + nutritionVariable2;
+  const nutritionVariable = addNutrition * 4;
+  const nutritionVariable2 = parseInt(fats) * 9;
+  console.log(nutritionVariable, nutritionVariable2);
+  const calories = nutritionVariable + nutritionVariable2;
   return (dispatch) => {
     fetch("http://192.168.1.19:3000/api/nutrition/create", {
       method: "POST",
@@ -642,18 +642,21 @@ export const createNutrition = ({ protein, carbohydrate, fats, token }) => {
         calories: calories,
       }),
     })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        dispatch({ type: "NEW_NUTRITION", payload: data });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res, "RES");
+        dispatch({
+          type: "NEW_NUTRITION",
+          payload: {
+            res,
+          },
+        });
       })
       .catch((error) => {
-        console.log("error load nutrition!", error);
-        return dispatch({
-          type: "SET_ERROR",
-          payload: "Error: Could not connect to the server",
+        console.log(error);
+        dispatch({
+          type: "SET_ERROR_NUTRITION",
+          payload: error,
         });
       });
   };

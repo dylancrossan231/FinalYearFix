@@ -45,7 +45,6 @@ this.props.loadInitialExercises(this.props.token);
 }
  
   render() {
-    console.log(this.props, "THESE PROPS EXERCISE");
   
     const { token, loading, error, exercises, workoutExercises } = this.props;
     if (loading || (!error && exercises.length === 0))

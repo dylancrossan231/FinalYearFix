@@ -74,17 +74,17 @@ class loginScreen extends Component {
               </Button>
             </View>
             <View style={styles.addButton}>
-              {/* <Button
+              <Button
                 block
                 rounded
-                title="Login"
+                title="Register"
                 style={styles.btnStyle}
-                onPress={this.props.navigation.navigate(routes.SIGN_UP)}
+                onPress={() => this.props.navigation.navigate(routes.SIGN_UP)}
               >
                 <Text style={styles.btnText}>
                   Dont have an account? Sign Up here.
                 </Text>
-              </Button> */}
+              </Button>
             </View>
           </View>
         </ScrollView>

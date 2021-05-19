@@ -41,13 +41,13 @@ export default (state = initialState, action) => {
     case "FORM_UPDATE_WEIGHT":
       return {
         ...state,
+        
         [action.payload.prop]: action.payload.value,
       };
     case "NEW_WEIGHT":
-      console.log(action.payload.weight);
       return {
         ...state,
-        weights: [...state.weights, action.payload],
+        weights: [...state.weights, action.payload.res],
       };
     case "UPDATE_WEIGHT":
       //finding index of the item
@@ -64,8 +64,9 @@ export default (state = initialState, action) => {
         //copying the orignal state
         ...state,
         //reassingning todos to new array
-        sleeps: newArray,
+        weights: newArray,
       };
+      
     case "PASS_WEIGHT_AND_ID_TO_STATE":
       console.log(action.payload);
       return {

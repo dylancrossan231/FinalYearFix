@@ -12,6 +12,7 @@ router.post("/create", verify, async (req, res) => {
   let workoutbody = req.body.workoutObject;
   let workoutExercises = req.body.workoutObject.workoutExercises;
   let workoutName = workoutbody.workout.workout_name;
+  console.log(workoutExercises)
 
   //Check if the workout Name exists
   const checkWorkoutname = await Workout.findOne({
@@ -51,7 +52,11 @@ router.post("/create", verify, async (req, res) => {
       if (workoutExercise.exercise) {
         workout.exercises.push(workoutExercise.exercise);
       }
-      new WorkoutExercises(workoutExercise).save();
+     new WorkoutExercises(workoutExercise);
+      
+      // newWorkout.save(function(err) {
+      // if (err) return console.log(err);
+      // });
     });
     console.log(req.body);
     res.send(req.body);

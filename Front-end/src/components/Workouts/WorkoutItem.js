@@ -57,6 +57,7 @@ const WorkoutItem = (props) => {
         <CardItem>
           <Body>
             <Text>{props?.workout?.workout_name}</Text>
+            <Text>{props?.workout?.exercises}</Text>
           </Body>
         </CardItem>
         <CardItem footer>
@@ -65,11 +66,7 @@ const WorkoutItem = (props) => {
             style={{ color: "#5DB075" }}
             onPress={() => props.deleteWorkout(props.token, props.workout._id)}
           >
-            <Icon
-              style={{ color: "#5DB075" }}
-              name="delete"
-              size={40}
-            />
+            <Icon style={{ color: "#5DB075" }} name="delete" size={40} />
           </Button>
         </CardItem>
       </Card>

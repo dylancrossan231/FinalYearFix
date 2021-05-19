@@ -44,10 +44,9 @@ export default (state = initialState, action) => {
         [action.payload.prop]: action.payload.value,
       };
     case "NEW_NUTRITION":
-      console.log(action.payload.nutrition);
       return {
         ...state,
-        nutritions: [...state.nutritions, action.payload],
+        nutritions: [...state.nutritions, action.payload.res],
       };
     case "UPDATE_NUTRITION":
       //finding index of the item

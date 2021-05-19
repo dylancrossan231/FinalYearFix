@@ -42,13 +42,14 @@ export default (state = initialState, action) => {
         [action.payload.prop]: action.payload.value,
       };
     case "NEW_SLEEPS":
-      console.log(action.payload);
+      console.log(action.payload, "DEFINED");
       return {
         ...state,
-        sleeps: [...state.sleeps, action.payload],
+        sleeps: [...state.sleeps, action.payload.res],
       };
 
     case "UPDATE_SLEEPS":
+      console.log(action.payload, "RIGHT HERE");
       //finding index of the item
       const index = state.sleeps.findIndex(
         (item) => item._id === action.payload.res._id

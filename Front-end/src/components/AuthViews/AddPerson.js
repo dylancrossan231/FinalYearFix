@@ -76,7 +76,7 @@ class AddPerson extends Component {
                   >
                     <Input
                       onChangeText={(value) =>
-                        this.props.formUpdate2({ prop: "email", value })
+                        this.props.formUpdate({ prop: "email", value })
                       }
                       placeholder="Email Address"
                     />
@@ -91,7 +91,7 @@ class AddPerson extends Component {
                   >
                     <Input
                       onChangeText={(value) =>
-                        this.props.formUpdate2({ prop: "password", value })
+                        this.props.formUpdate({ prop: "password", value })
                       }
                       placeholder="Password"
                     />

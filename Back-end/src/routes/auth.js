@@ -11,6 +11,7 @@ const verify = require("./verifyToken");
 dotenv.config();
 
 router.post("/register", async (req, res) => {
+  console.log(req.body)
   //vallidation needs to be fixed
   // const {error} = registerValidation(req.body)
 

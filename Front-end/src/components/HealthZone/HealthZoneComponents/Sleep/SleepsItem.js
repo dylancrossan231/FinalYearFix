@@ -60,12 +60,12 @@ const SleepsItem = (props) => {
     <Content>
       <Card>
         <CardItem header>
-          <Text>Date Created: {props.sleep.created_date}</Text>
+          <Text>Date Created: {props?.sleep?.created_date}</Text>
         </CardItem>
         <CardItem>
           <Body>
-            <Text>{props.sleep.hours} Hours</Text>
-            <Text>{props.sleep.minutes} Minutes</Text>
+            <Text>{props?.sleep?.hours} Hours</Text>
+            <Text>{props?.sleep?.minutes} Minutes</Text>
           </Body>
         </CardItem>
         <CardItem footer>

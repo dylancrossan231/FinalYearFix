@@ -32,7 +32,7 @@ router.post("/create", verify, async (req, res) => {
         })
         .catch((err) => console.log(err));
     });
-    res.send(req.body);
+    res.send(weight);
   } catch (err) {
     res.status(400).send(err);
   }
